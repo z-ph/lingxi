@@ -165,7 +165,7 @@ function formatThousands(value: number): string {
     : value.toLocaleString('en-US', { maximumFractionDigits: 1 });
 }
 
-function printReport(report: Report): void {
+function printReport(report: Report, source: 'bundled' | 'input'): void {
   const headers = ['App', 'Locale', 'Nodes', 'Raw nodes', 'Raw tokens', 'Payload', 'Truncated'];
   const rows = report.measurements.map((entry) => [
     entry.name,
@@ -183,7 +183,11 @@ function printReport(report: Report): void {
     cells.map((cell, column) => cell.padEnd(widths[column] as number)).join('  ').trimEnd();
 
   console.log(`ui_tree token budget — pruned JSON payload, ${report.tokenizer}`);
-  console.log('Representative app fixtures (not real-device captures; see docs/mcp-tools.md)');
+  console.log(
+    source === 'bundled'
+      ? 'Representative app fixtures (not real-device captures; see docs/mcp-tools.md)'
+      : 'Custom JSON dumps (converted to RawUiNode)',
+  );
   console.log('');
   console.log(line(headers));
   console.log(line(widths.map((width) => '-'.repeat(width))));
@@ -220,7 +224,7 @@ async function main(): Promise<void> {
   if (options.json) {
     console.log(JSON.stringify(report, null, 2));
   } else {
-    printReport(report);
+    printReport(report, options.input ? 'input' : 'bundled');
   }
 
   if (options.enforce && !report.pass) process.exitCode = 1;
