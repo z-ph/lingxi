@@ -24,13 +24,6 @@ type NodeTraits = Pick<
   'id' | 'text' | 'description' | 'clickable' | 'editable' | 'visible'
 >;
 
-interface Rect {
-  readonly left: number;
-  readonly top: number;
-  readonly right: number;
-  readonly bottom: number;
-}
-
 function rect(left: number, top: number, right: number, bottom: number): Bounds {
   return { left, top, right, bottom };
 }
