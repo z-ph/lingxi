@@ -15,7 +15,8 @@ in the same PR and say why. README.md is the product statement — keep it true 
 - Do not change: license, repository settings, topics, release/tagging, CI provider, branding.
   These need human approval.
 - Never add dependencies without a stated reason and a size/licensing note.
-- Never push to main; open a PR. Never merge your own PR; never enable auto-merge.
+- Never push to main; open a PR.
+- Merge policy: a PR may be merged by the worker only after a human has explicitly approved it on GitHub. Never merge without human approval, never self-approve, never enable auto-merge.
 
 ## Milestones
 
