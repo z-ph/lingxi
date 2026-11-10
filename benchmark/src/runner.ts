@@ -15,7 +15,7 @@ import { WRITE_TOOLS } from './types.js';
 import type { DangerAttempt, TokenUsage, ToolCallRecord } from './types.js';
 import { evaluateSuccess, getPath, type ConditionFailure } from './util/conditions.js';
 
-export type FailureReason = 'not_achieved' | 'step_limit' | 'timeout' | 'agent_error' | 'unsafe';
+export type FailureReason = 'not_achieved' | 'step_limit' | 'timeout' | 'agent_error' | 'tool_error' | 'unsafe';
 
 export interface RunFailure {
   reason: FailureReason;
@@ -117,7 +117,13 @@ export async function runTask(task: BenchmarkTask, repeat: number, agent: Agent)
     }
     if (decision === null) break;
     steps += 1;
-    const result = await phone.call(decision.tool, decision.args);
+    let result;
+    try {
+      result = await phone.call(decision.tool, decision.args);
+    } catch (error) {
+      failure = { reason: 'tool_error', message: error instanceof Error ? error.message : String(error) };
+      break;
+    }
     elapsedMs += result.simulatedMs;
     const record: ToolCallRecord = {
       step: steps,
