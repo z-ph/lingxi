@@ -54,6 +54,7 @@ Design principles:
 - [MCP tool surface](docs/mcp-tools.md) — the contract agents see
 - [Security](docs/security.md) — threat model and safety requirements
 - [Benchmark](docs/benchmark.md) — how we measure success
+- [FAQ](docs/en/faq.md) — root/developer mode, data, Android versions
 
 ## Contributing
 
