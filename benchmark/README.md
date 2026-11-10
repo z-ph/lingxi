@@ -122,7 +122,7 @@ npm run bench -- --agent=openai \
 | 重复 | 默认 5 次/任务；`--repeat` 可改 |
 | 随机性 | 无：世界由 `createWorld()` + task.setup 确定性构造，工具输出不含墙钟时间 |
 
-"耗时"是上表模拟延迟之和，不是墙钟时间；墙钟时间只写入 `runs.jsonl` 备查。这样同一版本的结果可逐位复现。
+"耗时"是上表模拟延迟之和，不是墙钟时间；墙钟时间只写入 `runs.jsonl` 备查。这样同一版本的指标可逐位复现（`runs.jsonl` 中仅 `wallMs`/`startedAt` 会随机器变化）。
 
 ## 指标定义
 
