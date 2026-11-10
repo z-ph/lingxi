@@ -1,0 +1,23 @@
+{
+  "name": "@phone-as-tool/benchmark",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Reproducible 30-task benchmark for Phone as Tool: task set, reference harness, metrics and raw logs.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test dist/test/*.test.js",
+    "bench": "npm run build && node dist/src/cli.js run",
+    "bench:list": "npm run build && node dist/src/cli.js list",
+    "bench:verify": "npm run build && node dist/src/cli.js verify"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "typescript": "^5.9.3"
+  }
+}

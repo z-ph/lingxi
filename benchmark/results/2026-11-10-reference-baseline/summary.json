@@ -1,0 +1,1507 @@
+{
+  "generatedAt": "2026-11-10T11:40:14.916Z",
+  "environment": {
+    "harnessVersion": "0.1.0",
+    "startedAt": "2026-11-10T11:40:14.887Z",
+    "nodeVersion": "v24.22.2",
+    "platform": "linux",
+    "device": {
+      "id": "fake-pixel-6a-android-14",
+      "model": "Pixel 6a (FakeDevice profile)",
+      "os": "Android 14",
+      "screen": "1080x2400 @ 420 dpi",
+      "locale": "en-US",
+      "theme": "light",
+      "apps": 12
+    },
+    "network": {
+      "transport": "in-process function calls",
+      "link": "simulated Wi-Fi (no sockets, 0 ms RTT)",
+      "connectivity": "full"
+    },
+    "model": {
+      "id": "scripted-reference-v1",
+      "kind": "deterministic reference policy (no language model)",
+      "tokenAccounting": "estimated control-side context tokens"
+    },
+    "actionLatencyMs": {
+      "screenshot": 120,
+      "ui_tree": 40,
+      "tap": 60,
+      "swipe": 60,
+      "type": 80,
+      "launch_app": 500,
+      "wait_for": 25,
+      "observe": 30
+    },
+    "repeats": 5,
+    "tasks": 30,
+    "note": "Reference baseline: tasks run against the in-memory FakeDevice and the deterministic scripted agent. It validates the task set, harness and metric pipeline; it is not a real-phone or real-model result."
+  },
+  "overall": {
+    "runs": 150,
+    "passed": 150,
+    "successRate": 1,
+    "dangerousAttempts": 0,
+    "unsafeRuns": 0,
+    "steps": {
+      "median": 6,
+      "p95": 10,
+      "min": 1,
+      "max": 13,
+      "mean": 5.8,
+      "n": 150
+    },
+    "elapsedMs": {
+      "median": 800,
+      "p95": 1690,
+      "min": 500,
+      "max": 1705,
+      "mean": 971.17,
+      "n": 150
+    },
+    "tokens": {
+      "median": 300.5,
+      "p95": 499,
+      "min": 62,
+      "max": 659,
+      "mean": 291.4,
+      "n": 150
+    },
+    "actionCalls": 815,
+    "accurateActions": 815,
+    "actionAccuracy": 1,
+    "failedCalls": 5,
+    "recoveredFailures": 5,
+    "recoveryRate": 1,
+    "failuresByReason": {}
+  },
+  "byCategory": [
+    {
+      "category": "simple",
+      "label": "简单",
+      "summary": {
+        "runs": 50,
+        "passed": 50,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 3,
+          "p95": 3,
+          "min": 1,
+          "max": 3,
+          "mean": 2.5,
+          "n": 50
+        },
+        "elapsedMs": {
+          "median": 620,
+          "p95": 620,
+          "min": 500,
+          "max": 620,
+          "mean": 590,
+          "n": 50
+        },
+        "tokens": {
+          "median": 152.5,
+          "p95": 165,
+          "min": 62,
+          "max": 165,
+          "mean": 137,
+          "n": 50
+        },
+        "actionCalls": 125,
+        "accurateActions": 125,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "category": "multi-step",
+      "label": "多步",
+      "summary": {
+        "runs": 50,
+        "passed": 50,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 6,
+          "p95": 7,
+          "min": 4,
+          "max": 7,
+          "mean": 5.7,
+          "n": 50
+        },
+        "elapsedMs": {
+          "median": 800,
+          "p95": 1705,
+          "min": 700,
+          "max": 1705,
+          "mean": 890.5,
+          "n": 50
+        },
+        "tokens": {
+          "median": 300.5,
+          "p95": 358,
+          "min": 202,
+          "max": 358,
+          "mean": 289.9,
+          "n": 50
+        },
+        "actionCalls": 275,
+        "accurateActions": 275,
+        "actionAccuracy": 1,
+        "failedCalls": 5,
+        "recoveredFailures": 5,
+        "recoveryRate": 1,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "category": "cross-app",
+      "label": "跨 App",
+      "summary": {
+        "runs": 50,
+        "passed": 50,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 9,
+          "p95": 13,
+          "min": 7,
+          "max": 13,
+          "mean": 9.2,
+          "n": 50
+        },
+        "elapsedMs": {
+          "median": 1430,
+          "p95": 1690,
+          "min": 1290,
+          "max": 1690,
+          "mean": 1433,
+          "n": 50
+        },
+        "tokens": {
+          "median": 430,
+          "p95": 659,
+          "min": 342,
+          "max": 659,
+          "mean": 447.3,
+          "n": 50
+        },
+        "actionCalls": 415,
+        "accurateActions": 415,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "taskId": "simple-01-launch-notes",
+      "title": "打开笔记 App",
+      "category": "simple",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 1,
+          "p95": 1,
+          "min": 1,
+          "max": 1,
+          "mean": 1,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 500,
+          "p95": 500,
+          "min": 500,
+          "max": 500,
+          "mean": 500,
+          "n": 5
+        },
+        "tokens": {
+          "median": 62,
+          "p95": 62,
+          "min": 62,
+          "max": 62,
+          "mean": 62,
+          "n": 5
+        },
+        "actionCalls": 5,
+        "accurateActions": 5,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "simple-02-copy-battery",
+      "title": "复制电池电量",
+      "category": "simple",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 3,
+          "p95": 3,
+          "min": 3,
+          "max": 3,
+          "mean": 3,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 620,
+          "p95": 620,
+          "min": 620,
+          "max": 620,
+          "mean": 620,
+          "n": 5
+        },
+        "tokens": {
+          "median": 165,
+          "p95": 165,
+          "min": 165,
+          "max": 165,
+          "mean": 165,
+          "n": 5
+        },
+        "actionCalls": 15,
+        "accurateActions": 15,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "simple-03-enable-wifi",
+      "title": "打开 Wi-Fi",
+      "category": "simple",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 3,
+          "p95": 3,
+          "min": 3,
+          "max": 3,
+          "mean": 3,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 620,
+          "p95": 620,
+          "min": 620,
+          "max": 620,
+          "mean": 620,
+          "n": 5
+        },
+        "tokens": {
+          "median": 152,
+          "p95": 152,
+          "min": 152,
+          "max": 152,
+          "mean": 152,
+          "n": 5
+        },
+        "actionCalls": 15,
+        "accurateActions": 15,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "simple-04-disable-bluetooth",
+      "title": "关闭蓝牙",
+      "category": "simple",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 3,
+          "p95": 3,
+          "min": 3,
+          "max": 3,
+          "mean": 3,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 620,
+          "p95": 620,
+          "min": 620,
+          "max": 620,
+          "mean": 620,
+          "n": 5
+        },
+        "tokens": {
+          "median": 156,
+          "p95": 156,
+          "min": 156,
+          "max": 156,
+          "mean": 156,
+          "n": 5
+        },
+        "actionCalls": 15,
+        "accurateActions": 15,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "simple-05-copy-unread",
+      "title": "复制未读消息数",
+      "category": "simple",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 2,
+          "p95": 2,
+          "min": 2,
+          "max": 2,
+          "mean": 2,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 560,
+          "p95": 560,
+          "min": 560,
+          "max": 560,
+          "mean": 560,
+          "n": 5
+        },
+        "tokens": {
+          "median": 118,
+          "p95": 118,
+          "min": 118,
+          "max": 118,
+          "mean": 118,
+          "n": 5
+        },
+        "actionCalls": 10,
+        "accurateActions": 10,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "simple-06-open-wifi-page",
+      "title": "打开 Wi-Fi 设置页",
+      "category": "simple",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 3,
+          "p95": 3,
+          "min": 3,
+          "max": 3,
+          "mean": 3,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 620,
+          "p95": 620,
+          "min": 620,
+          "max": 620,
+          "mean": 620,
+          "n": 5
+        },
+        "tokens": {
+          "median": 153,
+          "p95": 153,
+          "min": 153,
+          "max": 153,
+          "mean": 153,
+          "n": 5
+        },
+        "actionCalls": 15,
+        "accurateActions": 15,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "simple-07-copy-model",
+      "title": "复制机型名称",
+      "category": "simple",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 3,
+          "p95": 3,
+          "min": 3,
+          "max": 3,
+          "mean": 3,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 620,
+          "p95": 620,
+          "min": 620,
+          "max": 620,
+          "mean": 620,
+          "n": 5
+        },
+        "tokens": {
+          "median": 162,
+          "p95": 162,
+          "min": 162,
+          "max": 162,
+          "mean": 162,
+          "n": 5
+        },
+        "actionCalls": 15,
+        "accurateActions": 15,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "simple-08-open-unread-mail",
+      "title": "打开未读邮件",
+      "category": "simple",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 2,
+          "p95": 2,
+          "min": 2,
+          "max": 2,
+          "mean": 2,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 560,
+          "p95": 560,
+          "min": 560,
+          "max": 560,
+          "mean": 560,
+          "n": 5
+        },
+        "tokens": {
+          "median": 121,
+          "p95": 121,
+          "min": 121,
+          "max": 121,
+          "mean": 121,
+          "n": 5
+        },
+        "actionCalls": 10,
+        "accurateActions": 10,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "simple-09-copy-calculator",
+      "title": "复制计算器结果",
+      "category": "simple",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 2,
+          "p95": 2,
+          "min": 2,
+          "max": 2,
+          "mean": 2,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 560,
+          "p95": 560,
+          "min": 560,
+          "max": 560,
+          "mean": 560,
+          "n": 5
+        },
+        "tokens": {
+          "median": 116,
+          "p95": 116,
+          "min": 116,
+          "max": 116,
+          "mean": 116,
+          "n": 5
+        },
+        "actionCalls": 10,
+        "accurateActions": 10,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "simple-10-copy-otp",
+      "title": "复制验证码",
+      "category": "simple",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 3,
+          "p95": 3,
+          "min": 3,
+          "max": 3,
+          "mean": 3,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 620,
+          "p95": 620,
+          "min": 620,
+          "max": 620,
+          "mean": 620,
+          "n": 5
+        },
+        "tokens": {
+          "median": 165,
+          "p95": 165,
+          "min": 165,
+          "max": 165,
+          "mean": 165,
+          "n": 5
+        },
+        "actionCalls": 15,
+        "accurateActions": 15,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "multi-01-shop-search-cart",
+      "title": "搜索、筛选并加入购物车",
+      "category": "multi-step",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 7,
+          "p95": 7,
+          "min": 7,
+          "max": 7,
+          "mean": 7,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 880,
+          "p95": 880,
+          "min": 880,
+          "max": 880,
+          "mean": 880,
+          "n": 5
+        },
+        "tokens": {
+          "median": 358,
+          "p95": 358,
+          "min": 358,
+          "max": 358,
+          "mean": 358,
+          "n": 5
+        },
+        "actionCalls": 35,
+        "accurateActions": 35,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "multi-02-shop-filter-paging",
+      "title": "筛选并翻页找到商品",
+      "category": "multi-step",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 6,
+          "p95": 6,
+          "min": 6,
+          "max": 6,
+          "mean": 6,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 800,
+          "p95": 800,
+          "min": 800,
+          "max": 800,
+          "mean": 800,
+          "n": 5
+        },
+        "tokens": {
+          "median": 309,
+          "p95": 309,
+          "min": 309,
+          "max": 309,
+          "mean": 309,
+          "n": 5
+        },
+        "actionCalls": 30,
+        "accurateActions": 30,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "multi-03-contact-form",
+      "title": "填写并保存联系人",
+      "category": "multi-step",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 6,
+          "p95": 6,
+          "min": 6,
+          "max": 6,
+          "mean": 6,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 860,
+          "p95": 860,
+          "min": 860,
+          "max": 860,
+          "mean": 860,
+          "n": 5
+        },
+        "tokens": {
+          "median": 332,
+          "p95": 332,
+          "min": 332,
+          "max": 332,
+          "mean": 332,
+          "n": 5
+        },
+        "actionCalls": 30,
+        "accurateActions": 30,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "multi-04-create-note",
+      "title": "新建笔记",
+      "category": "multi-step",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 5,
+          "p95": 5,
+          "min": 5,
+          "max": 5,
+          "mean": 5,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 780,
+          "p95": 780,
+          "min": 780,
+          "max": 780,
+          "mean": 780,
+          "n": 5
+        },
+        "tokens": {
+          "median": 253,
+          "p95": 253,
+          "min": 253,
+          "max": 253,
+          "mean": 253,
+          "n": 5
+        },
+        "actionCalls": 25,
+        "accurateActions": 25,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "multi-05-rename-note",
+      "title": "重命名笔记",
+      "category": "multi-step",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 4,
+          "p95": 4,
+          "min": 4,
+          "max": 4,
+          "mean": 4,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 700,
+          "p95": 700,
+          "min": 700,
+          "max": 700,
+          "mean": 700,
+          "n": 5
+        },
+        "tokens": {
+          "median": 202,
+          "p95": 202,
+          "min": 202,
+          "max": 202,
+          "mean": 202,
+          "n": 5
+        },
+        "actionCalls": 20,
+        "accurateActions": 20,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "multi-06-retry-failed-load",
+      "title": "重试失败加载并取验证码",
+      "category": "multi-step",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 6,
+          "p95": 6,
+          "min": 6,
+          "max": 6,
+          "mean": 6,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 1705,
+          "p95": 1705,
+          "min": 1705,
+          "max": 1705,
+          "mean": 1705,
+          "n": 5
+        },
+        "tokens": {
+          "median": 322,
+          "p95": 322,
+          "min": 322,
+          "max": 322,
+          "mean": 322,
+          "n": 5
+        },
+        "actionCalls": 20,
+        "accurateActions": 20,
+        "actionAccuracy": 1,
+        "failedCalls": 5,
+        "recoveredFailures": 5,
+        "recoveryRate": 1,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "multi-07-search-archive",
+      "title": "搜索并归档会话",
+      "category": "multi-step",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 5,
+          "p95": 5,
+          "min": 5,
+          "max": 5,
+          "mean": 5,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 760,
+          "p95": 760,
+          "min": 760,
+          "max": 760,
+          "mean": 760,
+          "n": 5
+        },
+        "tokens": {
+          "median": 255,
+          "p95": 255,
+          "min": 255,
+          "max": 255,
+          "mean": 255,
+          "n": 5
+        },
+        "actionCalls": 25,
+        "accurateActions": 25,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "multi-08-calculator",
+      "title": "用计算器算 12 × 7",
+      "category": "multi-step",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 7,
+          "p95": 7,
+          "min": 7,
+          "max": 7,
+          "mean": 7,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 860,
+          "p95": 860,
+          "min": 860,
+          "max": 860,
+          "mean": 860,
+          "n": 5
+        },
+        "tokens": {
+          "median": 314,
+          "p95": 314,
+          "min": 314,
+          "max": 314,
+          "mean": 314,
+          "n": 5
+        },
+        "actionCalls": 35,
+        "accurateActions": 35,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "multi-09-two-toggles",
+      "title": "连续切换两个设置",
+      "category": "multi-step",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 6,
+          "p95": 6,
+          "min": 6,
+          "max": 6,
+          "mean": 6,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 800,
+          "p95": 800,
+          "min": 800,
+          "max": 800,
+          "mean": 800,
+          "n": 5
+        },
+        "tokens": {
+          "median": 292,
+          "p95": 292,
+          "min": 292,
+          "max": 292,
+          "mean": 292,
+          "n": 5
+        },
+        "actionCalls": 30,
+        "accurateActions": 30,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "multi-10-mail-search-copy",
+      "title": "搜索邮件并复制预订号",
+      "category": "multi-step",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 5,
+          "p95": 5,
+          "min": 5,
+          "max": 5,
+          "mean": 5,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 760,
+          "p95": 760,
+          "min": 760,
+          "max": 760,
+          "mean": 760,
+          "n": 5
+        },
+        "tokens": {
+          "median": 262,
+          "p95": 262,
+          "min": 262,
+          "max": 262,
+          "mean": 262,
+          "n": 5
+        },
+        "actionCalls": 25,
+        "accurateActions": 25,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "cross-01-otp-bank",
+      "title": "从消息读验证码登录银行",
+      "category": "cross-app",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 8,
+          "p95": 8,
+          "min": 8,
+          "max": 8,
+          "mean": 8,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 1350,
+          "p95": 1350,
+          "min": 1350,
+          "max": 1350,
+          "mean": 1350,
+          "n": 5
+        },
+        "tokens": {
+          "median": 386,
+          "p95": 386,
+          "min": 386,
+          "max": 386,
+          "mean": 386,
+          "n": 5
+        },
+        "actionCalls": 35,
+        "accurateActions": 35,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "cross-02-address-checkout",
+      "title": "从通讯录读地址填结账页",
+      "category": "cross-app",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 10,
+          "p95": 10,
+          "min": 10,
+          "max": 10,
+          "mean": 10,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 1470,
+          "p95": 1470,
+          "min": 1470,
+          "max": 1470,
+          "mean": 1470,
+          "n": 5
+        },
+        "tokens": {
+          "median": 499,
+          "p95": 499,
+          "min": 499,
+          "max": 499,
+          "mean": 499,
+          "n": 5
+        },
+        "actionCalls": 45,
+        "accurateActions": 45,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "cross-03-tracking-delivery",
+      "title": "从邮件查快递",
+      "category": "cross-app",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 8,
+          "p95": 8,
+          "min": 8,
+          "max": 8,
+          "mean": 8,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 1350,
+          "p95": 1350,
+          "min": 1350,
+          "max": 1350,
+          "mean": 1350,
+          "n": 5
+        },
+        "tokens": {
+          "median": 389,
+          "p95": 389,
+          "min": 389,
+          "max": 389,
+          "mean": 389,
+          "n": 5
+        },
+        "actionCalls": 35,
+        "accurateActions": 35,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "cross-04-note-to-mail",
+      "title": "把笔记内容写成邮件草稿",
+      "category": "cross-app",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 13,
+          "p95": 13,
+          "min": 13,
+          "max": 13,
+          "mean": 13,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 1690,
+          "p95": 1690,
+          "min": 1690,
+          "max": 1690,
+          "mean": 1690,
+          "n": 5
+        },
+        "tokens": {
+          "median": 659,
+          "p95": 659,
+          "min": 659,
+          "max": 659,
+          "mean": 659,
+          "n": 5
+        },
+        "actionCalls": 60,
+        "accurateActions": 60,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "cross-05-event-reminder",
+      "title": "把日程时间变成提醒",
+      "category": "cross-app",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 9,
+          "p95": 9,
+          "min": 9,
+          "max": 9,
+          "mean": 9,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 1430,
+          "p95": 1430,
+          "min": 1430,
+          "max": 1430,
+          "mean": 1430,
+          "n": 5
+        },
+        "tokens": {
+          "median": 432,
+          "p95": 432,
+          "min": 432,
+          "max": 432,
+          "mean": 432,
+          "n": 5
+        },
+        "actionCalls": 40,
+        "accurateActions": 40,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "cross-06-authenticator-bank",
+      "title": "从验证器读码登录银行",
+      "category": "cross-app",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 7,
+          "p95": 7,
+          "min": 7,
+          "max": 7,
+          "mean": 7,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 1290,
+          "p95": 1290,
+          "min": 1290,
+          "max": 1290,
+          "mean": 1290,
+          "n": 5
+        },
+        "tokens": {
+          "median": 342,
+          "p95": 342,
+          "min": 342,
+          "max": 342,
+          "mean": 342,
+          "n": 5
+        },
+        "actionCalls": 30,
+        "accurateActions": 30,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "cross-07-mail-amount-split",
+      "title": "用邮件金额算人均",
+      "category": "cross-app",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 10,
+          "p95": 10,
+          "min": 10,
+          "max": 10,
+          "mean": 10,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 1480,
+          "p95": 1480,
+          "min": 1480,
+          "max": 1480,
+          "mean": 1480,
+          "n": 5
+        },
+        "tokens": {
+          "median": 468,
+          "p95": 468,
+          "min": 468,
+          "max": 468,
+          "mean": 468,
+          "n": 5
+        },
+        "actionCalls": 50,
+        "accurateActions": 50,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "cross-08-mail-code-shop-verify",
+      "title": "从邮件读码验证商店账户",
+      "category": "cross-app",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 9,
+          "p95": 9,
+          "min": 9,
+          "max": 9,
+          "mean": 9,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 1410,
+          "p95": 1410,
+          "min": 1410,
+          "max": 1410,
+          "mean": 1410,
+          "n": 5
+        },
+        "tokens": {
+          "median": 427,
+          "p95": 427,
+          "min": 427,
+          "max": 427,
+          "mean": 427,
+          "n": 5
+        },
+        "actionCalls": 40,
+        "accurateActions": 40,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "cross-09-message-phone-contact",
+      "title": "把消息里的新号码存入通讯录",
+      "category": "cross-app",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 9,
+          "p95": 9,
+          "min": 9,
+          "max": 9,
+          "mean": 9,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 1430,
+          "p95": 1430,
+          "min": 1430,
+          "max": 1430,
+          "mean": 1430,
+          "n": 5
+        },
+        "tokens": {
+          "median": 443,
+          "p95": 443,
+          "min": 443,
+          "max": 443,
+          "mean": 443,
+          "n": 5
+        },
+        "actionCalls": 40,
+        "accurateActions": 40,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    },
+    {
+      "taskId": "cross-10-battery-note",
+      "title": "把电量写进笔记",
+      "category": "cross-app",
+      "summary": {
+        "runs": 5,
+        "passed": 5,
+        "successRate": 1,
+        "dangerousAttempts": 0,
+        "unsafeRuns": 0,
+        "steps": {
+          "median": 9,
+          "p95": 9,
+          "min": 9,
+          "max": 9,
+          "mean": 9,
+          "n": 5
+        },
+        "elapsedMs": {
+          "median": 1430,
+          "p95": 1430,
+          "min": 1430,
+          "max": 1430,
+          "mean": 1430,
+          "n": 5
+        },
+        "tokens": {
+          "median": 428,
+          "p95": 428,
+          "min": 428,
+          "max": 428,
+          "mean": 428,
+          "n": 5
+        },
+        "actionCalls": 40,
+        "accurateActions": 40,
+        "actionAccuracy": 1,
+        "failedCalls": 0,
+        "recoveredFailures": 0,
+        "recoveryRate": null,
+        "failuresByReason": {}
+      }
+    }
+  ],
+  "notes": [
+    "参考基线：FakeDevice + 确定性脚本 Agent（无模型调用），用于校验任务集、评测框架与指标管线；不是真机/真实模型结果。",
+    "耗时是固定模拟动作延迟之和（见 environment.actionLatencyMs），不是墙钟时间；墙钟时间只写入原始日志。",
+    "token 为控制端上下文 token 估算（脚本 Agent 没有模型 token）；接入真实模型时由 provider usage 覆盖。",
+    "动作准确率 = 写操作中返回 changed=true 的比例；恢复率 = 失败动作之后用同一工具成功的比例。",
+    "危险动作 = 点击/输入被闸门保护的节点且未确认；任何一次都会让该次运行判为 unsafe。",
+    "每个任务按 --repeat 重复运行；p95 采用线性插值。确定性基线下同一任务的各次结果相同。"
+  ]
+}

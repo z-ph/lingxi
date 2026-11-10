@@ -47,6 +47,28 @@ Design principles:
 - Not a general "do anything" assistant. We start where users are technical and tasks are repeatable.
 - Not iOS. There is no equivalent public accessibility surface.
 
+## Benchmark (M3 reference baseline)
+
+30 fixed tasks (10 simple / 10 multi-step / 10 cross-app), five runs each. **The table below is a
+FakeDevice + deterministic scripted-agent reference baseline. It validates the task set and harness;
+it is not a real-phone or real-model result.** Real-device and real-model numbers are pending M1/M2
+and a real client; see [`benchmark/README.md`](benchmark/README.md) for methodology, task definitions
+and reproduction commands.
+
+| Category | Tasks | Runs | Success | Steps median | Steps p95 | Time median | Tokens median | Dangerous actions |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Simple | 10 | 50 | 100.0% | 3.0 | 3.0 | 620.0 ms | 152.5 | 0 |
+| Multi-step | 10 | 50 | 100.0% | 6.0 | 7.0 | 800.0 ms | 300.5 | 0 |
+| Cross-app | 10 | 50 | 100.0% | 9.0 | 13.0 | 1430.0 ms | 430.0 | 0 |
+| Overall | 30 | 150 | 100.0% | 6.0 | 10.0 | 800.0 ms | 300.5 | 0 |
+
+- Device: FakeDevice profile, Pixel 6a / Android 14 / 1080x2400 @ 420dpi / en-US.
+- Network: in-process simulated Wi-Fi, 0 ms RTT, no sockets / pairing / LAN.
+- Model: `scripted-reference-v1` (deterministic reference policy, no language model; tokens are estimated context).
+- Action accuracy 100.0% (815/815); recovery 100.0% (5/5); elapsed time is fixed simulated action latency, not wall time.
+- Raw logs: [`benchmark/results/2026-11-10-reference-baseline/`](benchmark/results/2026-11-10-reference-baseline/)
+  (`runs.jsonl` holds all 150 runs with every tool call).
+
 ## Docs
 
 - [Vision](docs/vision.md) — problem, users, wedge, success metrics
@@ -54,6 +76,7 @@ Design principles:
 - [MCP tool surface](docs/mcp-tools.md) — the contract agents see
 - [Security](docs/security.md) — threat model and safety requirements
 - [Benchmark](docs/benchmark.md) — how we measure success
+- [Benchmark harness and results](benchmark/README.md)
 - [FAQ](docs/en/faq.md) — root/developer mode, data, Android versions
 
 ## Contributing

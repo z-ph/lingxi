@@ -46,6 +46,27 @@ Phone as Tool 在手机这一侧补上这个缺口，而且控制权在你手里
 - 不是"什么都能干"的通用助手。先服务技术用户和可重复的任务。
 - 不做 iOS。没有对等的公开无障碍接口。
 
+## 评测（M3 参考基线）
+
+30 个固定任务（10 简单 / 10 多步 / 10 跨 App），每个任务跑 5 次。**下表是 FakeDevice + 确定性脚本
+Agent 的参考基线，用于验证任务集与评测框架，不是真机或真实模型成绩。** 真机与真实模型数字待 M1/M2
+和真实客户端可用后补测；方法、任务定义与复现命令见
+[`benchmark/README.md`](benchmark/README.md)。
+
+| 类别 | 任务 | 运行 | 成功率 | 步数中位数 | 步数 p95 | 耗时中位数 | token 中位数 | 危险动作 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 简单 | 10 | 50 | 100.0% | 3.0 | 3.0 | 620.0 ms | 152.5 | 0 |
+| 多步 | 10 | 50 | 100.0% | 6.0 | 7.0 | 800.0 ms | 300.5 | 0 |
+| 跨 App | 10 | 50 | 100.0% | 9.0 | 13.0 | 1430.0 ms | 430.0 | 0 |
+| 合计 | 30 | 150 | 100.0% | 6.0 | 10.0 | 800.0 ms | 300.5 | 0 |
+
+- 设备：FakeDevice profile，Pixel 6a / Android 14 / 1080×2400 @ 420dpi / en-US。
+- 网络：进程内模拟 Wi-Fi，0 ms RTT，无 socket / 配对 / 局域网。
+- 模型：`scripted-reference-v1`（确定性参考策略，不调用语言模型；token 为上下文估算）。
+- 动作准确率 100.0%（815/815）；恢复率 100.0%（5/5）；耗时是固定模拟动作延迟，不是墙钟时间。
+- 原始日志：[`benchmark/results/2026-11-10-reference-baseline/`](benchmark/results/2026-11-10-reference-baseline/)
+  （`runs.jsonl` 为 150 次运行的完整工具调用记录）。
+
 ## 文档
 
 - [愿景](docs/vision.md)（[English](docs/en/vision.md)）
@@ -53,6 +74,7 @@ Phone as Tool 在手机这一侧补上这个缺口，而且控制权在你手里
 - [MCP 工具契约](docs/mcp-tools.md)（[English](docs/en/mcp-tools.md)）
 - [安全](docs/security.md)（[English](docs/en/security.md)）
 - [评测](docs/benchmark.md)（[English](docs/en/benchmark.md)）
+- [评测框架与结果](benchmark/README.md)
 - [常见问题](docs/faq.md)（[English](docs/en/faq.md)）
 
 ## 参与
