@@ -1,0 +1,18 @@
+# Android / Gradle
+.gradle/
+build/
+local.properties
+*.iml
+.idea/
+# Node
+node_modules/
+# OS
+.DS_Store
+Thumbs.db
+# Local env
+.env
+*.keystore
+*.jks
+# Logs / artifacts
+*.log
+artifacts/
