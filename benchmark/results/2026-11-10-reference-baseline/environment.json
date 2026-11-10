@@ -1,0 +1,38 @@
+{
+  "harnessVersion": "0.1.0",
+  "startedAt": "2026-11-10T11:40:14.887Z",
+  "nodeVersion": "v24.22.2",
+  "platform": "linux",
+  "device": {
+    "id": "fake-pixel-6a-android-14",
+    "model": "Pixel 6a (FakeDevice profile)",
+    "os": "Android 14",
+    "screen": "1080x2400 @ 420 dpi",
+    "locale": "en-US",
+    "theme": "light",
+    "apps": 12
+  },
+  "network": {
+    "transport": "in-process function calls",
+    "link": "simulated Wi-Fi (no sockets, 0 ms RTT)",
+    "connectivity": "full"
+  },
+  "model": {
+    "id": "scripted-reference-v1",
+    "kind": "deterministic reference policy (no language model)",
+    "tokenAccounting": "estimated control-side context tokens"
+  },
+  "actionLatencyMs": {
+    "screenshot": 120,
+    "ui_tree": 40,
+    "tap": 60,
+    "swipe": 60,
+    "type": 80,
+    "launch_app": 500,
+    "wait_for": 25,
+    "observe": 30
+  },
+  "repeats": 5,
+  "tasks": 30,
+  "note": "Reference baseline: tasks run against the in-memory FakeDevice and the deterministic scripted agent. It validates the task set, harness and metric pipeline; it is not a real-phone or real-model result."
+}
