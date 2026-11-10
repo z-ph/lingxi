@@ -6,7 +6,11 @@ import { promisify } from 'node:util';
 import test from 'node:test';
 import { Client, StreamableHTTPClientTransport } from '@modelcontextprotocol/client';
 import { startDaemon, type DaemonOptions, type RunningDaemon } from '../src/daemon.js';
+import { FakeDevice } from '../src/device/fake-device.js';
 import { createMemoryLogger, type MemoryLogger } from '../src/logger.js';
+import { PairingManager } from '../src/pairing/pairing-manager.js';
+import { TokenStore } from '../src/pairing/token-store.js';
+import { startHttpServer } from '../src/server/http.js';
 import { M1_TOOL_NAMES } from '../src/server/tools.js';
 import type { PendingApproval } from '../src/pairing/pairing-manager.js';
 
@@ -99,6 +103,29 @@ test('health is reachable without a token and exposes no secrets', async (t) => 
   assert.equal(body.ok, true);
   assert.equal(body.name, 'phone-as-tool');
   assert.equal('token' in body, false);
+});
+
+test('the exported HTTP server refuses wildcard and public bind addresses', async () => {
+  const tokenStore = TokenStore.inMemory();
+  const pairing = new PairingManager({ tokenStore });
+  try {
+    for (const host of ['0.0.0.0', '8.8.8.8', '::']) {
+      await assert.rejects(
+        startHttpServer({
+          host,
+          port: 0,
+          device: new FakeDevice(),
+          tokenStore,
+          pairing,
+          logger: createMemoryLogger().logger,
+        }),
+        /refusing to bind/,
+      );
+    }
+  } finally {
+    pairing.close();
+    tokenStore.close();
+  }
 });
 
 test('MCP endpoint rejects missing and invalid bearer tokens', async (t) => {
