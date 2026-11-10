@@ -1,8 +1,8 @@
-# Lingxi (灵犀)
+# Phone as Tool (Phone as Tool)
 
 **Your Android phone, as a tool for AI agents.**
 
-Lingxi turns a real Android device into a local MCP device daemon: an agent running on your
+Phone as Tool turns a real Android device into a local MCP device daemon: an agent running on your
 laptop or in the cloud gets eyes and hands on your actual phone — screenshot, UI tree, tap, type,
 swipe, launch app, wait for UI — on your real apps, without emulators, USB cables or ADB debugging.
 
@@ -18,14 +18,14 @@ Coding agents already run on your computer. The missing piece is the phone:
 - Cloud phone-control products require handing over the device; most people will not.
 - The agent ecosystem (Claude Code, Cursor, DSH, ...) speaks MCP; phones do not.
 
-Lingxi closes that gap on the phone itself, under your control.
+Phone as Tool closes that gap on the phone itself, under your control.
 
 ## How it works (intended)
 
     Agent (Claude Code / Cursor / DSH / cloud)
             |  MCP over LAN  (pairing token)
             v
-    Lingxi app on your Android phone
+    Phone as Tool app on your Android phone
             +- Accessibility service: UI tree, tap, swipe, type, back/home
             +- Screen capture: screenshots on demand
             +- App control: list / launch / foreground detection

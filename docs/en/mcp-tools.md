@@ -26,7 +26,7 @@ Invariants:
 
 ## Pairing
 
-1. User opens Lingxi -> "Connect an agent" -> shows QR + 6-digit code.
+1. User opens Phone as Tool -> "Connect an agent" -> shows QR + 6-digit code.
 2. Client connects to http://<phone-lan-ip>:<port>/mcp with the pairing token.
 3. Phone prompts: allow this client? (name + fingerprint), then LAN-only session until revoked.
 4. All sessions listed in the app with last-used time and revoke button.

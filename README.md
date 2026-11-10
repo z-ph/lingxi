@@ -1,10 +1,10 @@
-# 灵犀（Lingxi）
+# Phone as Tool
 
 [简体中文](README.md) | [English](README.en.md)
 
 **把你的 Android 手机，变成 AI Agent 的工具。**
 
-灵犀把一台真 Android 手机变成一个本地 MCP 设备守护进程：跑在电脑或云端的 Agent 可以看见屏幕、
+Phone as Tool 把一台真 Android 手机变成一个本地 MCP 设备守护进程：跑在电脑或云端的 Agent 可以看见屏幕、
 读取界面树、点击、输入、启动 App、等待界面变化——操作的是你手机里的真实 App，不需要模拟器、
 USB 线或 ADB 调试。
 
@@ -20,14 +20,14 @@ USB 线或 ADB 调试。
 - 云手机方案要求把设备交出去，大多数人不会给。
 - Agent 生态（Claude Code、Cursor、DSH……）都说 MCP，唯独手机不会。
 
-灵犀在手机这一侧补上这个缺口，而且控制权在你手里。
+Phone as Tool 在手机这一侧补上这个缺口，而且控制权在你手里。
 
 ## 工作方式（目标形态）
 
     Agent（Claude Code / Cursor / DSH / 云端）
             |  MCP over 局域网（配对令牌）
             v
-    手机上的灵犀 App
+    手机上的 Phone as Tool App
             +- 无障碍服务：界面树、点击、滑动、输入、返回/主页
             +- 截屏：按需截图
             +- App 控制：列出 / 启动 / 前台检测
