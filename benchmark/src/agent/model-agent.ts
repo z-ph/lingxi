@@ -162,8 +162,10 @@ export class ModelAgent implements Agent {
   private readonly options: ModelAgentOptions;
   private readonly fetchImpl: typeof fetch;
   private messages: ChatMessage[] = [];
-  private inputTokens = 0;
-  private outputTokens = 0;
+  private providerInputTokens = 0;
+  private providerOutputTokens = 0;
+  private estimatedInputTokens = 0;
+  private estimatedOutputTokens = 0;
   private sawUsage = false;
   private pendingCallId: string | null = null;
   private toolCalls = 0;
@@ -178,8 +180,10 @@ export class ModelAgent implements Agent {
   }
 
   reset(task: BenchmarkTask): void {
-    this.inputTokens = 0;
-    this.outputTokens = 0;
+    this.providerInputTokens = 0;
+    this.providerOutputTokens = 0;
+    this.estimatedInputTokens = 0;
+    this.estimatedOutputTokens = 0;
     this.sawUsage = false;
     this.pendingCallId = null;
     this.toolCalls = 0;
@@ -194,7 +198,7 @@ export class ModelAgent implements Agent {
       },
       { role: 'user', content: task.prompt },
     ];
-    this.inputTokens += estimateTokens(task.prompt);
+    this.estimatedInputTokens += estimateTokens(task.prompt);
   }
 
   async next(task: BenchmarkTask, _step: number): Promise<AgentDecision | null> {
@@ -228,11 +232,11 @@ export class ModelAgent implements Agent {
     const usage = data.usage;
     if (isRecord(usage)) {
       if (typeof usage.prompt_tokens === 'number') {
-        this.inputTokens += usage.prompt_tokens;
+        this.providerInputTokens += usage.prompt_tokens;
         this.sawUsage = true;
       }
       if (typeof usage.completion_tokens === 'number') {
-        this.outputTokens += usage.completion_tokens;
+        this.providerOutputTokens += usage.completion_tokens;
         this.sawUsage = true;
       }
     }
@@ -275,7 +279,7 @@ export class ModelAgent implements Agent {
     this.messages.push({ role: 'assistant', content, tool_calls: [assistantCall] });
     this.pendingCallId = rawCall.id;
     this.toolCalls += 1;
-    this.outputTokens += estimateTokens(rawArguments);
+    this.estimatedOutputTokens += estimateTokens(rawArguments);
     return { tool, args };
   }
 
@@ -286,16 +290,24 @@ export class ModelAgent implements Agent {
       tool_call_id: this.pendingCallId,
       content: record.resultText,
     });
-    this.inputTokens += estimateTokens(record.resultText);
+    this.estimatedInputTokens += estimateTokens(record.resultText);
     this.pendingCallId = null;
   }
 
   usage(): TokenUsage {
+    if (this.sawUsage) {
+      return {
+        input: this.providerInputTokens,
+        output: this.providerOutputTokens,
+        total: this.providerInputTokens + this.providerOutputTokens,
+        source: 'provider-usage',
+      };
+    }
     return {
-      input: this.inputTokens,
-      output: this.outputTokens,
-      total: this.inputTokens + this.outputTokens,
-      source: this.sawUsage ? 'provider-usage' : 'estimated-context',
+      input: this.estimatedInputTokens,
+      output: this.estimatedOutputTokens,
+      total: this.estimatedInputTokens + this.estimatedOutputTokens,
+      source: 'estimated-context',
     };
   }
 }
