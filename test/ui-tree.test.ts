@@ -159,6 +159,16 @@ test('maxDepth limits traversal, reports truncation, and validates input', () =>
   assert.throws(() => pruneUiTree(root, { maxDepth: Number.NaN }), RangeError);
 });
 
+test('the default depth boundary includes a node exactly at depth 30', () => {
+  let chain = node({ clickable: true, text: 'depth-30' });
+  for (let depth = DEFAULT_MAX_DEPTH; depth > 0; depth -= 1) chain = node({}, [chain]);
+
+  const payload = pruneUiTree(chain);
+
+  assert.deepEqual(payload.nodes.map((entry) => entry.text), ['depth-30']);
+  assert.equal(payload.truncated, false);
+});
+
 test('default maxDepth is 30 and deeper trees are truncated', () => {
   let deep = node({ clickable: true, text: 'too-deep' });
   for (let depth = DEFAULT_MAX_DEPTH + 1; depth > 0; depth -= 1) deep = node({}, [deep]);
