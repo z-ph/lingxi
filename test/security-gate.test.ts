@@ -657,3 +657,26 @@ test("a broken cancellation hook cannot turn a denial into a crash", async () =>
   assert.equal(fixture.handlerCalls(), 0);
   assert.equal(fixture.audit.entries().at(-1)?.confirmation.outcome, "denied");
 });
+
+test("the gate rejects a missing tool registry at construction", () => {
+  assert.throws(() => new SecurityGate({ tools: null as never }), TypeError);
+});
+
+test("a label launch must be resolved to a package, even with a benign package argument", async () => {
+  const harness = createHarness({ allowApps: [NOTES_APP] });
+  const ambiguous = await harness.gate.execute(
+    harness.call("launch_app", { package: NOTES_APP, label: "Evil" }, appContext(LAUNCHER)),
+  );
+  expectFailure(ambiguous, "blocked");
+  assert.equal(harness.audit.entries().at(-1)?.reason, "app_unknown");
+
+  const resolved = await harness.gate.execute(
+    harness.call(
+      "launch_app",
+      { package: NOTES_APP, label: "Notes" },
+      { foregroundPackage: LAUNCHER, targetPackage: NOTES_APP },
+    ),
+  );
+  assert.equal(resolved.ok, true);
+  assert.deepEqual(harness.audit.entries().at(-1)?.appPackages, [NOTES_APP]);
+});

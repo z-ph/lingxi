@@ -95,6 +95,18 @@ test("long strings and nested structures are reduced to a summary", () => {
   assert.equal(deep["deeper"], "[object]");
 });
 
+test("binary payloads are reduced to a byte count", () => {
+  const parameters = summarizeParameters("screenshot", { data: new Uint8Array([1, 2, 3]) });
+  assert.equal(parameters["data"], "[binary 3 bytes]");
+  const result = summarizeToolResult({
+    ok: true,
+    result: { pixels: new Uint8Array([1, 2, 3, 4]), raw: new ArrayBuffer(8) },
+  });
+  assert.equal(result.summary.includes("1"), false);
+  assert.match(result.summary, /binary 4 bytes/);
+  assert.match(result.summary, /binary 8 bytes/);
+});
+
 test("result summaries never contain screen text, pixels or API payloads", () => {
   const uiTree = summarizeToolResult({
     ok: true,
@@ -296,4 +308,50 @@ test("security events are audited in the same chain", () => {
   assert.equal(entry.client, null);
   assert.deepEqual(entry.parameters, { clientsRevoked: 2 });
   assert.equal(log.verify().ok, true);
+});
+
+test("sequence and previous-hash tampering are detected", () => {
+  const { log } = auditWithMemory();
+  for (let index = 0; index < 2; index += 1) {
+    log.record({
+      client: CLIENT,
+      tool: "tap",
+      args: { index },
+      decision: "allowed",
+      result: { status: "ok", summary: "ok" },
+      durationMs: 1,
+    });
+  }
+
+  const sequenceTampered = JSON.parse(JSON.stringify(log.entries())) as AuditEntry[];
+  (sequenceTampered[1] as unknown as { seq: number }).seq = 5;
+  const sequenceCheck = verifyAuditChain(sequenceTampered);
+  assert.equal(sequenceCheck.ok, false);
+  assert.equal(sequenceCheck.brokenAt, 5);
+  assert.match(sequenceCheck.reason ?? "", /sequence/);
+
+  const hashTampered = JSON.parse(JSON.stringify(log.entries())) as AuditEntry[];
+  (hashTampered[1] as unknown as { prevHash: string }).prevHash = "f".repeat(64);
+  const hashCheck = verifyAuditChain(hashTampered);
+  assert.equal(hashCheck.ok, false);
+  assert.equal(hashCheck.brokenAt, 2);
+  assert.match(hashCheck.reason ?? "", /prevHash/);
+});
+
+test("an empty default audit log still exports valid JSON/JSONL", () => {
+  const log = new AuditLog({ clock: FIXED_CLOCK });
+  assert.equal(log.size, 0);
+  assert.equal(log.exportJsonl(), "");
+  assert.equal(log.export(), "");
+  const json = JSON.parse(log.exportJson()) as { version: number; entries: unknown[] };
+  assert.equal(json.version, 1);
+  assert.deepEqual(json.entries, []);
+  assert.equal(log.verify().ok, true);
+});
+
+test("the JSONL sink exposes its local path", (t) => {
+  const directory = mkdtempSync(join(tmpdir(), "phone-as-tool-audit-path-"));
+  t.after(() => rmSync(directory, { recursive: true, force: true }));
+  const path = join(directory, "audit.jsonl");
+  assert.equal(new JsonlAuditSink(path).path, path);
 });

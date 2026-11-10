@@ -83,3 +83,10 @@ test("a broken token factory that repeats tokens is rejected", () => {
   assert.throws(() => registry.issue("second"), /duplicate token/);
   assert.equal(registry.activeCount(), 1);
 });
+
+test("overlong tokens are rejected before hashing work", () => {
+  const registry = deterministicRegistry();
+  const issued = registry.issue("Claude Code");
+  assert.deepEqual(registry.authenticate(issued.token), issued.client);
+  assert.equal(registry.authenticate("x".repeat(10_000)), null);
+});

@@ -28,6 +28,7 @@ export interface ClientRegistryOptions {
 }
 
 const MAX_CLIENT_NAME_LENGTH = 80;
+const MAX_TOKEN_LENGTH = 512;
 
 function tokenHash(token: string): string {
   return sha256Hex(token);
@@ -86,7 +87,7 @@ export class ClientRegistry {
 
   /** Authenticate a bearer token without ever exposing or logging the token. */
   authenticate(token: string): ClientIdentity | null {
-    if (typeof token !== "string" || token.length === 0) {
+    if (typeof token !== "string" || token.length === 0 || token.length > MAX_TOKEN_LENGTH) {
       return null;
     }
     const record = this.#byTokenHash.get(tokenHash(token));

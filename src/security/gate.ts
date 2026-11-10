@@ -122,8 +122,13 @@ export function resolveAppPackages(
   switch (tool) {
     case "launch_app":
       // The current foreground may be the launcher; only the target app matters.
-      add(args.package);
       add(context.targetPackage);
+      // A label must be resolved to a package by the daemon; never let a
+      // co-supplied benign package hide a label that points elsewhere.
+      if (typeof args.label === "string" && args.label.trim().length > 0 && context.targetPackage == null) {
+        break;
+      }
+      add(args.package);
       break;
     case "wait_for":
       add(args.package);
@@ -160,6 +165,9 @@ export class SecurityGate {
   readonly #confirmationTimeoutMs: number;
 
   constructor(options: SecurityGateOptions) {
+    if (options.tools === null || typeof options.tools !== "object") {
+      throw new TypeError("security gate requires a tool handler registry");
+    }
     const clock = options.clock ?? (() => new Date());
     const confirmationTimeoutMs = options.confirmationTimeoutMs ?? 30_000;
     if (!Number.isFinite(confirmationTimeoutMs) || confirmationTimeoutMs <= 0) {

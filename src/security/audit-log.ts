@@ -319,6 +319,12 @@ function summarizeValue(value: unknown, depth: number, tool: string): unknown {
   if (typeof value === "bigint") {
     return value.toString();
   }
+  if (ArrayBuffer.isView(value)) {
+    return `[binary ${value.byteLength} bytes]`;
+  }
+  if (value instanceof ArrayBuffer) {
+    return `[binary ${value.byteLength} bytes]`;
+  }
   if (depth >= 3) {
     return Array.isArray(value) ? `[${value.length} items]` : "[object]";
   }
@@ -372,6 +378,12 @@ function describeResult(value: unknown): string {
   if (typeof value === "number" || typeof value === "boolean") {
     return String(value);
   }
+  if (ArrayBuffer.isView(value)) {
+    return `<binary ${value.byteLength} bytes>`;
+  }
+  if (value instanceof ArrayBuffer) {
+    return `<binary ${value.byteLength} bytes>`;
+  }
   if (Array.isArray(value)) {
     return `[${value.length} items]`;
   }
@@ -391,6 +403,10 @@ function describeResult(value: unknown): string {
             ? `${key}=${truncateText(item, 80)}`
             : `${key}=<string ${item.length}>`,
         );
+      } else if (ArrayBuffer.isView(item)) {
+        parts.push(`${key}=<binary ${item.byteLength} bytes>`);
+      } else if (item instanceof ArrayBuffer) {
+        parts.push(`${key}=<binary ${item.byteLength} bytes>`);
       } else if (Array.isArray(item)) {
         parts.push(`${key}[${item.length}]`);
       } else if (typeof item === "object") {

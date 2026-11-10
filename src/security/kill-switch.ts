@@ -28,8 +28,9 @@ export interface KillSwitchReport {
 
 /**
  * One-tap disconnect: revoke every client token, cancel security work and stop
- * the MCP server. The gate checks `engaged` before every call, so in-flight or
- * subsequent requests are refused even if a stop callback misbehaves.
+ * the MCP server. The gate checks `engaged` before every call, so subsequent
+ * requests are refused even if a stop callback misbehaves; a handler that has
+ * already started cannot be rolled back.
  */
 export class KillSwitch {
   readonly #clients: ClientRegistry;

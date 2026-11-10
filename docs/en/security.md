@@ -43,8 +43,9 @@ execute -> audit. Every failure returns a typed error and leaves an audit entry.
 - `AppAllowlist` is empty by default. Device-side `add` / `remove` / `clear` are the only mutation
   points; there is no corresponding MCP tool.
 - Each call resolves its target app: `launch_app` uses the target package (the current launcher does
-  not count), other tools use the foreground package; `wait_for` may name a target package. An
-  unresolved target or a package outside the allowlist returns `blocked` and never executes.
+  not count), and a label launch must be resolved to a package by the daemon; other tools use the
+  foreground package; `wait_for` may name a target package. An unresolved target or a package
+  outside the allowlist returns `blocked` and never executes.
 - `tap` / `type` additionally require trusted `targetNode` context (it may be `null` when there is no
   node at that point / focus). Missing context is refused (fail closed) so dangerous labels cannot be
   bypassed.
