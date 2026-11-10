@@ -36,7 +36,9 @@ Invariants:
    the request stays pending until the device handles it.
 3. The token is issued only after **explicit device-side approval** (terminal y/n in M1, an app dialog
    in M2). The response is `{"token":"pat_...","client":{...}}`, returned exactly once. Denial, a
-   60-second approval timeout, or too many wrong code attempts fail the request.
+   60-second approval timeout, or too many wrong code attempts fail the request. `fingerprint` is a
+   client-reported display identifier used for recognition on the device; M1 does not treat it as a
+   cryptographic identity proof.
 4. The client sends `Authorization: Bearer <token>` to
    `http://<phone-lan-ip>:<port>/mcp`. **Tokens never go in the URL**; the server stores only a
    SHA-256 hash and never writes the token to a log.
