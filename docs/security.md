@@ -1,34 +1,30 @@
-# Security
+# 安全
 
-The phone is the most personal device a person owns. This document is the threat model the design
-must satisfy; M2 implements it.
+[简体中文](security.md) | [English](en/security.md)
 
-## Threats
+手机是个人最私密的设备。本文是设计必须满足的威胁模型；M2 实现。
 
-1. **Unauthorized client on the LAN** — someone scanning the network drives the phone.
-2. **Prompt injection from screen content** — an app, message or notification tells the agent to do
-   something harmful; the controlling agent obeys.
-3. **Destructive action** — payment, deletion, message sending, account change.
-4. **Data exfiltration** — screenshots, notifications, files leaving the device unexpectedly.
-5. **Credential exposure** — pairing token or app secrets leaking via logs/URLs.
-6. **Confused deputy** — a second agent/client inherits permissions granted to the first.
+## 威胁
 
-## Requirements
+1. **局域网内未授权客户端**：有人扫描网络驱动你的手机。
+2. **屏幕内容提示注入**：App、消息或通知诱导控制端 Agent 做坏事。
+3. **危险动作**：支付、删除、发消息、改账号。
+4. **数据外泄**：截图、通知、文件意外离开设备。
+5. **凭据泄露**：配对令牌或 App 密钥出现在日志/URL。
+6. **混淆代理**：第二个客户端继承了第一个客户端的权限。
 
-- Bind to LAN interface only; no public exposure by default.
-- Pairing requires a code shown on the phone + explicit allow prompt; tokens are per-client and
-  revocable; tokens never appear in server logs.
-- App allowlist: default empty — no app can be driven until the user adds it.
-- Dangerous-action gate: a per-tool policy (e.g. tap on a payment button, type into a password
-  field) requires device-side confirmation. The model cannot disable it.
-- Audit log: every tool call, client identity, args summary, result; local, exportable, never
-  uploaded.
-- Kill switch in the app: revoke all clients and stop the MCP server immediately.
-- Prompt-injection posture: tool results are data, not instructions; the daemon must not execute
-  instructions found in UI text.
-- Secrets at rest: Android Keystore for tokens; no plaintext in SharedPreferences/logs.
+## 要求
 
-## Out of scope (for now)
+- 只绑局域网接口；默认不对外暴露。
+- 配对需要手机上显示的配对码 + 明确允许；令牌按客户端发放、可撤销；令牌绝不进服务端日志。
+- 应用白名单：默认空——用户添加前，任何 App 都驱动不了。
+- 危险动作闸门：按工具策略（例如点击支付按钮、向密码框输入）需要设备端确认。模型无法关闭。
+- 审计日志：每次工具调用、客户端身份、参数摘要、结果；本地保存、可导出、不上传。
+- 一键断开：撤销所有客户端并立即停止 MCP 服务。
+- 提示注入对策：工具结果是数据不是指令；守护进程不执行界面文本里的指令。
+- 静态加密：Android Keystore 保存令牌；SharedPreferences/日志不存明文。
 
-- Multi-tenant device farms.
-- Remote access over the public internet (M4 optional relay; explicit pairing, off by default).
+## 暂不覆盖
+
+- 多租户设备农场。
+- 公网远程访问（M4 可选的中继；默认关闭，显式配对）。

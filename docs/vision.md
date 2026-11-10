@@ -1,43 +1,40 @@
-# Vision
+# 愿景
 
-## Problem
+[简体中文](vision.md) | [English](en/vision.md)
 
-Agents are becoming capable enough to do work, but on a phone they have no interface. Real
-Android apps have no stable API, emulators cannot reproduce the user's accounts and state, and
-cloud phone farms require surrendering the device. Meanwhile desktop agents (Claude Code, Cursor,
-DSH) are already where people run their most capable models — they just cannot reach the phone.
+## 问题
 
-## Users (in order)
+Agent 已经足够能干，但在手机上它没有接口。真实的 Android App 没有稳定 API，模拟器复现不了
+用户的账号和状态，云手机方案要求交出设备。与此同时，桌面 Agent（Claude Code、Cursor、DSH）
+已经是人们运行最强模型的地方——只是够不到手机。
 
-1. **Agent power users** — people already running coding/agent clients who want the phone as one
-   more tool (send the file I just downloaded, check my notifications, drive this app).
-2. **Mobile QA / automation** — teams that currently maintain Appium scripts; an agent plus a
-   stable device daemon replaces brittle selectors with on-demand judgement.
-3. **Accessibility / family support** — helping someone operate their own phone remotely, with
-   data staying on the device. (Later; privacy requirements are strict.)
+## 用户（按顺序）
 
-## Wedge
+1. **Agent 重度用户**：已经在用 coding/agent 客户端，想把手机当作多一个工具（把刚下载的文件发过去、
+   看通知、操作某个 App）。
+2. **移动 QA / 自动化团队**：现在维护 Appium 脚本；一个 Agent 加一个稳定的设备守护进程，
+   用现场判断替代脆弱的 selector。
+3. **无障碍 / 家庭协助**：帮家人远程操作他们自己的手机，数据留在设备上。（较晚；隐私要求严格。）
 
-**Phone as a tool**, not phone as an assistant.
+## 切入点
 
-- System-level assistants (Apple/Google/OEM) own "the phone's own brain"; we own "an agent's hands
-  for a phone".
-- Remote-control products (scrcpy/ADB/cloud phones) require developer mode, USB, or device
-  surrender; accessibility + LAN pairing is the consumer-viable path.
-- Existing MCP servers either need ADB/USB (fragile setup) or run inside the phone and cannot use
-  the strong model the user already pays for.
+**把手机当工具**，而不是把手机当助手。
 
-## Success metrics
+- 系统级助手（Apple/Google/厂商）占的是"手机自己的大脑"；我们占的是"Agent 操作手机的手"。
+- 远控产品（scrcpy/ADB/云手机）需要开发者模式、USB 或交出设备；无障碍 + 局域网配对才是普通人能用的路。
+- 现有 MCP server 要么依赖 ADB/USB（配置脆弱），要么只能在手机内运行、用不了用户已经付费的强模型。
 
-- A new user goes from APK to "my agent clicked something on my phone" in under 5 minutes.
-- Tool-call success rate >= 99% (the daemon's own actions, independent of model choice).
-- UI tree payload median < 3k tokens, p95 < 8k tokens.
-- No incident where an unauthorized client operated a phone.
-- 30-task benchmark: document success rate, steps, latency, tokens (see benchmark.md).
+## 成功指标
 
-## Risks
+- 新用户从装 APK 到"我的 Agent 在手机上点了一下"，5 分钟内完成。
+- 工具调用成功率 >= 99%（守护进程自身动作，与模型无关）。
+- ui_tree 载荷中位数 < 3k token，p95 < 8k token。
+- 没有发生过未授权客户端操控手机的事故。
+- 30 任务评测：公开成功率、步数、延迟、token（见 benchmark.md）。
 
-- Platform policy: accessibility is a sensitive permission; distribution will be sideload/enterprise.
-- App-side anti-automation detection.
-- Prompt injection from on-screen content into the controlling agent (see security.md).
-- Safety incidents (payments, deletions) damaging trust.
+## 风险
+
+- 平台政策：无障碍是敏感权限，分发会走侧载/企业。
+- App 侧的反自动化检测。
+- 屏幕内容对控制端 Agent 的提示注入（见 security.md）。
+- 安全事故（支付、删除）会毁掉信任。

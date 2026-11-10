@@ -1,32 +1,31 @@
-# Benchmark
+# 评测
 
-How we prove the thing works — and how contributors compare approaches. Numbers go in the README
-once M3 lands; until then this is the spec.
+[简体中文](benchmark.md) | [English](en/benchmark.md)
 
-## Task set (30)
+如何证明它真的能用，以及贡献者如何比较不同方案。M3 落地后数字进 README；在此之前这是方案。
 
-- 10 simple: open app, read a value on screen, toggle a setting, copy text from a screen.
-- 10 multi-step: search -> filter -> open detail -> act; fill a form; retry a failed load.
-- 10 cross-app: reason across two apps (e.g. read a code from messages, enter it in another app).
+## 任务集（30 个）
 
-Each task ships with: goal text, starting state, success predicate, dangerous-action label
-(if any), and environment requirements.
+- 10 个简单：打开 App、读取屏幕上的值、切换设置、复制屏幕文字。
+- 10 个多步：搜索 -> 筛选 -> 打开详情 -> 操作；填表；重试失败加载。
+- 10 个跨 App：在两个 App 之间推理（如从消息里读验证码，填进另一个 App）。
 
-## Metrics
+每个任务带：目标文本、初始状态、成功判定、危险动作标记（如有）、环境要求。
 
-| Metric | Definition |
+## 指标
+
+| 指标 | 定义 |
 | --- | --- |
-| Success rate | tasks passing success predicate / total |
-| Steps | tool calls per task |
-| Wall time | task start -> success predicate true |
-| Tokens | input+output attributed to the controlling agent |
-| Action accuracy | daemon actions whose observed effect matched intent |
-| Dangerous-action rate | attempts to trigger a gated action without confirmation (must be 0) |
-| Recovery rate | failed action -> recovered without human help |
+| 成功率 | 通过成功判定的任务数 / 总数 |
+| 步数 | 每个任务的工具调用数 |
+| 耗时 | 任务开始 -> 成功判定为真 |
+| token | 归因于控制端 Agent 的输入+输出 |
+| 动作准确率 | 守护进程动作的实际效果与意图一致的比例 |
+| 危险动作次数 | 未经确认触发闸门动作的尝试（必须为 0） |
+| 恢复率 | 动作失败 -> 无需人工帮助恢复的比例 |
 
-## Method
+## 方法
 
-- Record device (model, OS version, screen size), network, and agent/model versions.
-- Run each task 5x; report median and p95; publish raw logs.
-- Separate "daemon quality" (action accuracy) from "model quality" (planning), so results are
-  comparable across agents.
+- 记录设备（机型、系统版本、屏幕尺寸）、网络、Agent/模型版本。
+- 每个任务跑 5 次；报告中位数与 p95；公开原始日志。
+- 把"守护进程质量"（动作准确率）和"模型质量"（规划）分开，结果才能跨 Agent 比较。

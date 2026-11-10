@@ -1,41 +1,48 @@
-# AGENTS.md — how work happens here
+# AGENTS.md —— 这个仓库的工作方式
 
-This repository is operated by a proactive agent (dsh-superagent) under human ownership. Humans
-and agents follow the same rules.
+[简体中文](AGENTS.md) | [English](AGENTS.en.md)
 
-## Source of truth
+本仓库由主动式 agent（dsh-superagent）在人类所有者授权下运营。人和 agent 遵守同一套规则。
 
-docs/ is the contract. Code follows docs; if a change requires a different design, update the doc
-in the same PR and say why. README.md is the product statement — keep it true to reality.
+## 语言
 
-## Scope discipline
+仓库以**简体中文为主、英文为辅**：
 
-- One issue -> one PR. Only change what the issue asks; file follow-ups for the rest.
-- Until M1 code exists, docs-only contributions are the default.
-- Do not change: license, repository settings, topics, release/tagging, CI provider, branding.
-  These need human approval.
-- Never add dependencies without a stated reason and a size/licensing note.
-- Never push to main; open a PR. Never merge your own PR; never enable auto-merge.
+- README、docs/ 下的主版本用中文；英文镜像放 README.en.md、docs/en/。
+- issue、PR 标题和正文、提交信息用中文；PR 描述末尾可附一段简短英文摘要（English summary）。
+- 与所有者沟通用中文。
 
-## Milestones
+## 事实来源
 
-Work must name its milestone (M0-M4, see docs/roadmap.md). Do not start a later milestone before
-the current one meets its acceptance criteria.
+docs/ 是契约。代码服从文档；需要改设计时，同一个 PR 里更新文档并说明原因（中英文版本都改，
+或先改中文并标注英文待同步）。README 是产品表述，必须与现状一致。
 
-## Engineering standards
+## 范围纪律
 
-- Branch prefix: agent/<ticket-name>; humans may use their own names too.
-- Commits: imperative subject; body explains the why; reference the issue.
-- Every PR states: milestone, what changed, how it was verified, what is out of scope.
-- When code exists: it must build and pass tests before review; add a test for behavior changes.
-- Security-sensitive changes (see docs/security.md) require explicit human approval in the PR.
+- 一个 issue 对应一个 PR。只改 issue 要求的内容，其余另开 issue。
+- M1 代码出现之前，默认只提交文档。
+- 不要改：许可证、仓库设置、topics、发布/打标签、CI 供应商、品牌。这些需要人类批准。
+- 不轻易加依赖；要加就说明原因、体积和许可证。
+- 不直接推 main；一律开 PR。不合并自己的 PR；不开自动合并。
 
-## Communication
+## 里程碑
 
-- Issue/PR text: English. User-facing summaries to the owner: Chinese.
-- Ask a human only when a decision is needed; otherwise proceed and document the assumption.
-- Do not post progress updates; deliver results.
+每个改动要写明里程碑（M0–M4，见 docs/roadmap.md）。当前里程碑验收未通过前，不开始下一个。
 
-## First tasks
+## 工程标准
 
-M0 remaining: demo script + recording plan. Then M1. See the backlog issues for the current queue.
+- 分支前缀：agent/<任务名>；人类可用自己的命名。
+- 提交信息：祈使句标题；正文说明"为什么"；引用 issue。
+- 每个 PR 说明：里程碑、改了什么、如何验证、不做什么。
+- 有代码后：必须本地构建并通过测试；行为变更要有测试。
+- 安全相关改动（见 docs/security.md）需要 PR 中明确的人类批准。
+
+## 沟通
+
+- issue/PR 文本：中文（可附英文摘要）。
+- 只在需要决策时找人类；否则自己推进并在文档里记录假设。
+- 不要发进度汇报，直接交付结果。
+
+## 当前任务
+
+M0 剩余：demo 脚本与录制方案。然后进入 M1。当前队列见 backlog issues。

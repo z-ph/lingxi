@@ -1,16 +1,18 @@
 ---
-name: Task
-about: A unit of work with a clear milestone
+name: 任务
+about: 一个有明确里程碑的工作项
 labels: task
 ---
 
-**Milestone:** M0 / M1 / M2 / M3 / M4
+**里程碑：** M0 / M1 / M2 / M3 / M4
 
-**Goal**
+**目标**
 
-**Acceptance criteria**
+**验收标准**
 - [ ]
 
-**Out of scope**
+**不做什么**
 
-**Notes for the agent**
+**给 agent 的说明**
+
+<!-- English summary (optional): -->

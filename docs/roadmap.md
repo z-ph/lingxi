@@ -1,47 +1,49 @@
-# Roadmap
+# 路线图
 
-Milestones are sequential. A milestone ships only when its acceptance criteria pass.
+[简体中文](roadmap.md) | [English](en/roadmap.md)
 
-## M0 — Charter (this commit)
+里程碑按顺序推进；验收标准通过才算完成。
 
-- [x] Vision, non-goals, principles
-- [x] MCP tool contract
-- [x] Security requirements
-- [x] Benchmark plan
-- [x] AGENTS.md operating rules
-- [ ] 30-second demo script defined (issue)
+## M0 —— 立项（本提交）
 
-## M1 — MCP MVP (usable by a developer)
+- [x] 愿景、非目标、原则
+- [x] MCP 工具契约
+- [x] 安全要求
+- [x] 评测方案
+- [x] AGENTS.md 工作规则
+- [ ] 30 秒演示脚本与录制方案（issue #1）
 
-Acceptance:
-- App runs a local MCP server on the phone (LAN only), pairing by QR or code + token.
-- Six tools work end to end: screenshot, ui_tree, tap, type, launch_app, wait_for.
-- One documented one-line config for at least two MCP clients (Claude Code, Cursor/DSH).
-- Action results report whether the action took effect; failures are explicit, not silent.
-- Demo recording: agent on a laptop completes one real task on the phone.
+## M1 —— MCP MVP（开发者可用）
 
-Out of scope: record/replay, allowlist UI, multi-client concurrency fairness.
+验收：
+- 手机本地运行 MCP 服务（仅局域网），通过二维码或配对码 + 令牌配对。
+- 六个工具端到端可用：screenshot、ui_tree、tap、type、launch_app、wait_for。
+- 至少两个 MCP 客户端（Claude Code、Cursor/DSH）有一行接入文档。
+- 动作结果报告"是否生效"；失败显式返回，不静默。
+- 演示录制：笔记本上的 Agent 在手机上完成一个真实任务。
 
-## M2 — Safety and reliability
+不做：录制回放、白名单界面、多客户端并发公平性。
 
-Acceptance:
-- App allowlist enforced by default (empty = nothing can be driven until the user allows it).
-- Explicit confirmation gate for configured dangerous actions (payments, deletions, sending).
-- Audit log of every tool call: client, tool, args summary, result, timestamp; exportable.
-- Kill switch: disconnect all clients, revoke tokens.
-- Reconnect/idle handling: phone reboot, app backgrounded, network change.
+## M2 —— 安全与可靠性
 
-## M3 — Evaluation
+验收：
+- 应用白名单默认生效（空 = 在用户添加前什么都驱动不了）。
+- 危险动作（支付、删除、发送）需要设备端明确确认。
+- 审计日志：每次工具调用记录客户端、工具、参数摘要、结果、时间；可导出。
+- 一键断开：撤销所有客户端与令牌。
+- 断连/空闲处理：手机重启、App 退到后台、网络切换。
+- 按 security.md 实现最高风险项。
 
-Acceptance:
-- 30-task benchmark set (10 simple, 10 multi-step, 10 cross-app) with fixtures.
-- Harness runs a task set against a device and reports: success rate, steps, wall time, tokens,
-  dangerous-action attempts.
-- Results published in the README with hardware/network/model context.
+## M3 —— 评测
 
-## M4 — Ecosystem
+验收：
+- 30 任务集（10 简单、10 多步、10 跨 App）与固定环境。
+- 评测框架跑任务集并输出：成功率、步数、耗时、token、危险动作次数。
+- 结果连同设备/网络/模型信息发布在 README。
 
-- Chinese app skills (WeChat, Feishu, 小红书, 支付宝, 美团) as documented recipes.
-- Record & replay for frequent flows; deterministic replay + model recovery.
-- Multi-client concurrency policy (one active operator at a time by default).
-- Optional relay for remote use, off by default, with explicit pairing.
+## M4 —— 生态
+
+- 中文 App 技能（微信、飞书、小红书、支付宝、美团）作为文档化配方。
+- 常用流程录制回放：确定性回放 + 模型兜底。
+- 多客户端并发策略（默认同一时间一个操作者）。
+- 可选的远程中继，默认关闭，需显式配对。
