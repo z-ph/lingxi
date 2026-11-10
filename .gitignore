@@ -16,3 +16,7 @@ Thumbs.db
 # Logs / artifacts
 *.log
 artifacts/
+# Build output
+dist/
+dist-test/
+coverage/
