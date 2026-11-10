@@ -17,6 +17,7 @@ in the same PR and say why. README.md is the product statement — keep it true 
 - Never add dependencies without a stated reason and a size/licensing note.
 - Never push to main; open a PR.
 - Merge policy: a PR may be merged by the worker only after a human has explicitly approved it on GitHub. Never merge without human approval, never self-approve, never enable auto-merge.
+- Default to squash merge: one PR becomes one commit on main, keeping history linear.
 
 ## Milestones
 
