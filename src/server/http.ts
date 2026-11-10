@@ -17,7 +17,7 @@ import type { IncomingMessage, ServerResponse } from 'node:http';
 import { toNodeHandler } from '@modelcontextprotocol/node';
 import { createMcpHandler, type AuthInfo } from '@modelcontextprotocol/server';
 import type { Device } from '../device/types.js';
-import { allowedHostHeaders, formatHostForUrl, isAllowedPeerAddress } from '../lan.js';
+import { allowedHostHeaders, assertBindableAddress, formatHostForUrl, isAllowedPeerAddress } from '../lan.js';
 import { PairingError, type PairingManager } from '../pairing/pairing-manager.js';
 import type { TokenStore } from '../pairing/token-store.js';
 import type { Logger } from '../logger.js';
@@ -160,6 +160,10 @@ function pairingStatus(code: PairingError['code']): number {
 }
 
 export async function startHttpServer(options: HttpServerOptions): Promise<RunningHttpServer> {
+  assertBindableAddress(options.host);
+  if (!Number.isInteger(options.port) || options.port < 0 || options.port > 65_535) {
+    throw new Error(`invalid port: ${options.port}`);
+  }
   const logger = options.logger.child({ component: 'http' });
   const mcpHandler = createMcpHandler(() => createDeviceServer(options.device), { legacy: 'stateless' });
   const nodeHandler = toNodeHandler(mcpHandler, {
