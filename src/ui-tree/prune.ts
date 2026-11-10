@@ -185,7 +185,8 @@ function collapseWhitespace(value: string | undefined): string {
 
 function matchesFilter(node: RawUiNode, text: SelectedText, filter: string): boolean {
   if (!filter) return true;
-  const haystack = `${text.full} ${node.id ?? ''}`.toLowerCase();
+  const description = collapseWhitespace(node.description);
+  const haystack = `${text.full} ${description} ${node.id ?? ''}`.toLowerCase();
   return haystack.includes(filter);
 }
 

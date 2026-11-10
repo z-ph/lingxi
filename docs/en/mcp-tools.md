@@ -61,8 +61,8 @@ Rules:
 - `maxDepth` (default `30`): maximum traversal depth from the root (depth 0). It only limits
   node traversal; label aggregation for a kept interactive node may read deeper non-interactive
   descendants.
-- `filter`: case-insensitive substring matched against `text` or the resource `id`, applied on top
-  of `interactiveOnly`; an empty string means no filter.
+- `filter`: case-insensitive substring matched against `text`, `contentDescription`, or the
+  resource `id`, applied on top of `interactiveOnly`; an empty string means no filter.
 - Invisible nodes (`visible: false`) and their subtrees are omitted.
 - `bounds` are device pixels; the earlier "normalized bounds" wording is pinned down to this fixed
   four-value form so an agent can use it directly for coordinate taps.
@@ -89,7 +89,7 @@ Rules:
   with OpenAI's `o200k_base` BPE. Client tokenizers differ slightly; a stable public vocabulary is
   used as the proxy.
 - Reproduce: `npm ci && npm run measure`. The script exits non-zero when the budget fails.
-- Result (2026-11-10, five representative app fixtures in the repo):
+- Result (2026-11-10, five representative app fixtures in the repo, one screen per app):
 
 | App | Package | Returned nodes | Raw tree tokens | ui_tree tokens |
 | --- | --- | ---: | ---: | ---: |
@@ -103,6 +103,7 @@ Rules:
   value); with five apps that is the maximum, the conservative reading.
 - Limitation: CI has no Android device. The fixtures model the real apps' hierarchy structure but
   are **not device captures**. Real-device measurement awaits the M2 Android/Termux backend and can
-  then be run with `npm run measure -- --input <dump.json>` after converting the dump to `RawUiNode` JSON. Client tokenizers may also differ;
-  `o200k_base` is only a stable comparison, not the exact count for Claude Code / Cursor / DSH.
+  then be run with `npm run measure -- --input <dump.json>` after converting the dump to
+  `RawUiNode` JSON. Client tokenizers may also differ; `o200k_base` is only a stable comparison,
+  not the exact count for Claude Code / Cursor / DSH.
 - `interactiveOnly=false` also returns static text, which is larger and outside the default budget.

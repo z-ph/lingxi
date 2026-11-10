@@ -59,7 +59,7 @@ M1 实现见 `src/ui-tree/`。
   `interactiveOnly=false` 额外返回有文本的静态节点（用于读取正文），仍不返回空布局容器。
 - `maxDepth`（默认 `30`）：从根（深度 0）算起的最大遍历深度。它只限制节点遍历；
   为可交互节点补文本时仍可读取更深层的非交互子节点。
-- `filter`：不区分大小写的子串，匹配 `text` 或资源 `id`；与 `interactiveOnly` 叠加，
+- `filter`：不区分大小写的子串，匹配 `text`、`contentDescription` 或资源 `id`；与 `interactiveOnly` 叠加，
   空字符串表示不过滤。
 - 不可见节点（`visible: false`）及其子树不返回。
 - `bounds` 使用设备像素；M0 文档里的“归一化”在此具体化为固定的四元组，
@@ -85,7 +85,7 @@ M1 实现见 `src/ui-tree/`。
 - 测量对象：`ui_tree` 返回的紧凑 JSON（`JSON.stringify(payload)`），用 OpenAI
   `o200k_base` BPE 计数。不同客户端的 tokenizer 不完全一样，使用稳定的公开词表作为代理。
 - 复现：`npm ci && npm run measure`。数字不达标时脚本以非 0 退出。
-- 结果（2026-11-10，仓库内五个代表性 App fixture）：
+- 结果（2026-11-10，仓库内五个代表性 App fixture，每个 App 一个屏幕）：
 
 | App | 包名 | 返回节点 | 原始树 token | ui_tree token |
 | --- | --- | ---: | ---: | ---: |
@@ -99,6 +99,7 @@ M1 实现见 `src/ui-tree/`。
   五个 App 时等于最大值，是保守口径。
 - 限制：CI 没有 Android 真机；这些 fixture 是按真实 App 结构编写的代表性层级，
   **不是设备抓取**。真机测量待 M2 的 Android/Termux 后端接入后，用
-  `npm run measure -- --input <dump.json>` 对真实 dump（先转成 `RawUiNode` JSON）补测。客户端 tokenizer 也可能不同；
+  `npm run measure -- --input <dump.json>` 对真实 dump（先转成 `RawUiNode` JSON）补测。
+  客户端 tokenizer 也可能不同；
   `o200k_base` 只用于稳定比较，不代表 Claude Code / Cursor / DSH 的精确计数。
 - `interactiveOnly=false` 会额外返回静态文本，载荷更大，不属于默认预算目标。

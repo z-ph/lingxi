@@ -17,11 +17,18 @@ export interface UiTreeSource {
   dumpUiTree(): Promise<RawUiNode>;
 }
 
+/**
+ * Ask the device layer for the widest tree it supports; pruning belongs here,
+ * not in the adapter. M1's `Device.uiTree()` already accepts these options and
+ * returns the hierarchy without dropping non-interactive labels.
+ */
+const FULL_TREE_OPTIONS: UiTreeOptions = { interactiveOnly: false, maxDepth: 100 };
+
 /** Adapt a device adapter that exposes `uiTree()` to a {@link UiTreeSource}. */
 export function uiTreeSourceFromDevice(device: {
   uiTree(options?: UiTreeOptions): Promise<RawUiNode>;
 }): UiTreeSource {
-  return { dumpUiTree: () => device.uiTree() };
+  return { dumpUiTree: () => device.uiTree(FULL_TREE_OPTIONS) };
 }
 
 export interface UiTreeToolResult extends UiTreeSnapshot {

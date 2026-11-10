@@ -199,6 +199,17 @@ test('filter is case-insensitive and matches text or resource id', () => {
   assert.equal(pruneUiTree(root, { filter: '' }).nodes.length, 3);
 });
 
+test('filter also matches a content description when visible text exists', () => {
+  const root = node({}, [
+    node({ clickable: true, text: '关闭', description: 'dismiss dialog' }),
+  ]);
+
+  assert.deepEqual(
+    pruneUiTree(root, { filter: 'DISMISS' }).nodes.map((entry) => entry.text),
+    ['关闭'],
+  );
+});
+
 test('filter combines with interactiveOnly=false to find static content', () => {
   const root = node({}, [
     textNode('会议纪要：周五下午三点'),
@@ -264,12 +275,14 @@ test('callUiTree serializes compact JSON and passes options through', async () =
   assert.equal(result.byId.size, 1);
 });
 
-test('uiTreeSourceFromDevice adapts a device-style uiTree method', async () => {
+test('uiTreeSourceFromDevice asks for the full tree and adapts a uiTree method', async () => {
   const raw = node({ clickable: true, text: 'Wi-Fi' });
   let calls = 0;
+  let received: unknown;
   const source = uiTreeSourceFromDevice({
-    uiTree: async () => {
+    uiTree: async (options) => {
       calls += 1;
+      received = options;
       return raw;
     },
   });
@@ -277,6 +290,7 @@ test('uiTreeSourceFromDevice adapts a device-style uiTree method', async () => {
   const result = await callUiTree(source);
 
   assert.equal(calls, 1);
+  assert.deepEqual(received, { interactiveOnly: false, maxDepth: 100 });
   assert.equal(result.payload.nodes[0]?.text, 'Wi-Fi');
 });
 
