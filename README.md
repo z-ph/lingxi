@@ -8,8 +8,10 @@ Phone as Tool 把一台真 Android 手机变成一个本地 MCP 设备守护进�
 读取界面树、点击、输入、启动 App、等待界面变化——操作的是你手机里的真实 App，不需要模拟器、
 USB 线或 ADB 调试。
 
-> **状态：pre-alpha。** 目前还没有可用版本。这个仓库从立项文档、规格和 backlog 开始，
-> 实现按里程碑逐步落地。
+> **状态：pre-alpha。** 面向真机的可用版本还没有。M1 正在实现：仓库已包含仅局域网、
+> 配对码 + 明确批准 + 按客户端可撤销令牌的 Node 守护进程骨架，设备能力由 `FakeDevice` 提供；
+> 真机 Android 通道属于 M2。开发预览的构建、测试与配对流程见
+> [M1 守护进程](docs/daemon.md)。
 
 ## 为什么做
 
@@ -54,6 +56,7 @@ Phone as Tool 在手机这一侧补上这个缺口，而且控制权在你手里
 - [安全](docs/security.md)（[English](docs/en/security.md)）
 - [评测](docs/benchmark.md)（[English](docs/en/benchmark.md)）
 - [常见问题](docs/faq.md)（[English](docs/en/faq.md)）
+- [M1 守护进程（开发预览）](docs/daemon.md)（[English](docs/en/daemon.md)）
 
 ## 参与
 

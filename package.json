@@ -1,0 +1,28 @@
+{
+  "name": "phone-as-tool",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Phone as Tool: a LAN-only MCP device daemon that lets an AI agent drive an Android phone.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node scripts/run-tests.mjs",
+    "start": "node dist/src/cli.js",
+    "pair": "node dist/src/client/pair-cli.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/node": "^2.1.2",
+    "@modelcontextprotocol/server": "^2.4.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/client": "^2.4.0",
+    "@types/node": "^24.19.2",
+    "typescript": "^5.9.3"
+  }
+}
