@@ -6,8 +6,10 @@ Phone as Tool turns a real Android device into a local MCP device daemon: an age
 laptop or in the cloud gets eyes and hands on your actual phone — screenshot, UI tree, tap, type,
 swipe, launch app, wait for UI — on your real apps, without emulators, USB cables or ADB debugging.
 
-> **Status: pre-alpha.** There is no usable build yet. This repository starts with the charter,
-> specs and backlog; implementation lands milestone by milestone.
+> **Status: pre-alpha.** There is no usable build for a real phone yet. M1 is in progress: the
+> repository now contains a Node daemon skeleton with LAN-only binding, pairing-code + explicit
+> approval, and per-client revocable tokens; device capabilities come from `FakeDevice`, and the real
+> Android channel belongs to M2. See the [M1 daemon](docs/en/daemon.md) for build, test and pairing.
 
 ## Why
 
@@ -55,6 +57,7 @@ Design principles:
 - [Security](docs/security.md) — threat model and safety requirements
 - [Benchmark](docs/benchmark.md) — how we measure success
 - [FAQ](docs/en/faq.md) — root/developer mode, data, Android versions
+- [M1 daemon (developer preview)](docs/en/daemon.md) — build, pairing, token management, limits
 
 ## Contributing
 

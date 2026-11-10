@@ -16,3 +16,8 @@ Thumbs.db
 # Logs / artifacts
 *.log
 artifacts/
+
+# TypeScript build output
+dist/
+# Local daemon state (token hashes, never raw tokens)
+.phone-as-tool/

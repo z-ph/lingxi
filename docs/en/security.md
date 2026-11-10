@@ -1,7 +1,9 @@
 # Security
 
 The phone is the most personal device a person owns. This document is the threat model the design
-must satisfy; M2 implements it.
+must satisfy. M1 implements the foundation (LAN-only bind, pairing code + explicit approval,
+per-client revocable tokens, no tokens in logs); the allowlist, dangerous-action gate, audit log,
+kill switch and Android Keystore land in M2.
 
 ## Threats
 

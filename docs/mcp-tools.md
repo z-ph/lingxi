@@ -17,6 +17,9 @@
 | wait_for | nodeText?, package?, timeoutMs | {ok, matched, elapsedMs} |
 | observe | notifications?, clipboard? | 结构化文本 |
 
+M1 只实现前六个工具（screenshot、ui_tree、tap、type、launch_app、wait_for）；swipe 与 observe
+在后续里程碑补齐。
+
 不变量：
 
 - 每个写操作都返回**实际观察到的效果**（节点消失、文本出现），而不只是"已发送"。
@@ -24,16 +27,26 @@
 - ui_tree 由手机侧裁剪和限长：token 效率是守护进程的责任，不是客户端的。
 - 除非显式请求，不返回原始截图；截图像素不写日志。
 
-## 配对
+## 配对与认证（M1）
 
-1. 用户在 Phone as Tool 里点"连接 Agent"，显示二维码 + 6 位配对码。
-2. 客户端用配对令牌连接 http://<手机局域网 IP>:<端口>/mcp。
-3. 手机弹窗确认："允许此客户端？"（名称 + 指纹），批准后局域网内会话保持，直到撤销。
-4. App 内列出所有会话：最近使用时间 + 撤销按钮。
+1. 设备端启动配对会话，显示 6 位配对码和 `phonetool://pair?url=...&code=...` URI（后续可渲染为二维码）。
+   配对码默认 5 分钟有效、一次性使用。
+2. 客户端 `POST /pair`，请求体 `{"code":"123456","clientName":"Claude Code","fingerprint":"..."}`；
+   请求保持挂起，直到设备端处理。
+3. 设备端**明确批准**后才发放令牌（M1 为终端里的 y/n；M2 为 App 弹窗）。批准后返回
+   `{"token":"pat_...","client":{...}}`，令牌只返回这一次。拒绝、超时（默认 60 秒）或多次输错配对码都会失败。
+4. 客户端后续请求带 `Authorization: Bearer <token>` 访问 `http://<手机局域网 IP>:<端口>/mcp`。
+   **令牌不放进 URL**；服务端只保存 SHA-256 哈希，令牌绝不写入日志。
+5. 设备端列出所有客户端（名称、指纹、最近使用时间）并按 id 撤销；撤销后该客户端的下一次请求立即返回 401。
 
-## 客户端配置（目标）
+## 客户端配置（目标形态）
 
-    { "mcpServers": { "lingxi": { "url": "http://192.168.x.y:8765/mcp?token=..." } } }
+具体客户端写法见 issue #5；认证头是统一的：
+
+    { "mcpServers": { "phone-as-tool": {
+        "url": "http://192.168.x.y:8765/mcp",
+        "headers": { "Authorization": "Bearer pat_..." }
+    } } }
 
 ## token 预算
 
