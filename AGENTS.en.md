@@ -20,6 +20,10 @@ in the same PR and say why. README.md is the product statement — keep it true 
 - Default to squash merge: one PR becomes one commit on main, keeping history linear.
 - The PR body must contain an English closing keyword line (e.g. Closes #12) so GitHub closes the issue automatically on merge. Use Refs #12 with a reason when the issue should stay open. Do not close issues by hand after merge unless the PR lacked the keyword.
 
+## Budget
+
+The model provider (opencode-go / deepseek-v4.1-flash) has a very ample token budget. Do not stop early, skip context, skip verification, or hand back a draft to save tokens or time; optimize for correctness and completeness, and keep full technical evidence in the PR.
+
 ## Milestones
 
 Work must name its milestone (M0-M4, see docs/roadmap.md). Do not start a later milestone before
