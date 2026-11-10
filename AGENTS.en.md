@@ -18,6 +18,7 @@ in the same PR and say why. README.md is the product statement — keep it true 
 - Never push to main; open a PR.
 - Merge policy: a PR may be merged by the worker only after a human has explicitly approved it on GitHub. Never merge without human approval, never self-approve, never enable auto-merge.
 - Default to squash merge: one PR becomes one commit on main, keeping history linear.
+- The PR body must contain an English closing keyword line (e.g. Closes #12) so GitHub closes the issue automatically on merge. Use Refs #12 with a reason when the issue should stay open. Do not close issues by hand after merge unless the PR lacked the keyword.
 
 ## Milestones
 
