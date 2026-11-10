@@ -53,6 +53,7 @@ Phone as Tool 在手机这一侧补上这个缺口，而且控制权在你手里
 - [MCP 工具契约](docs/mcp-tools.md)（[English](docs/en/mcp-tools.md)）
 - [安全](docs/security.md)（[English](docs/en/security.md)）
 - [评测](docs/benchmark.md)（[English](docs/en/benchmark.md)）
+- [常见问题](docs/faq.md)（[English](docs/en/faq.md)）
 
 ## 参与
 
