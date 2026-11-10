@@ -412,7 +412,11 @@ export class SecurityGate {
     };
     const timeout = new Promise<ConfirmationDecision>((resolve) => {
       timer = setTimeout(() => {
-        controller.abort();
+        try {
+          controller.abort();
+        } catch {
+          // A broken abort listener must not prevent the timeout denial.
+        }
         resolve(timeoutDecision);
       }, this.#confirmationTimeoutMs);
       timer.unref();
@@ -443,7 +447,11 @@ export class SecurityGate {
     try {
       const decision = await Promise.race([requested, timeout]);
       if (!decision.approved) {
-        channel.cancel?.(prompt.id, decision.reason);
+        try {
+          channel.cancel?.(prompt.id, decision.reason);
+        } catch {
+          // A broken cancellation hook must not turn a denial into a crash.
+        }
       }
       return decision;
     } finally {

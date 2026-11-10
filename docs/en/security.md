@@ -90,7 +90,9 @@ execute -> audit. Every failure returns a typed error and leaves an audit entry.
   confirmations and calls the MCP server's `stop()`. It returns revocation/stop details and is
   idempotent.
 - Afterwards every call, including one with an old token, returns `blocked`; recovery requires
-  re-pairing and a service restart. A real app's button calls `SecurityGate.engageKillSwitch()`.
+  re-pairing and a service restart. A handler that already started cannot be rolled back; disconnect
+  stops further calls and pending confirmations. A real app's button calls
+  `SecurityGate.engageKillSwitch()`.
 
 ### Wiring example
 

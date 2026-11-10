@@ -259,6 +259,20 @@ test("benign actions do not prompt for confirmation", async () => {
   assert.equal(harness.audit.entries().at(-1)?.confirmation.required, false);
 });
 
+test("password-field evidence never copies user-visible text into the prompt", async () => {
+  const harness = createHarness();
+  const promise = harness.gate.execute(
+    harness.call("type", { nodeId: "pw", text: "hunter2" }, appContext(NOTES_APP, { text: "密码：hunter2" })),
+  );
+  await waitFor(() => (harness.confirmation?.size ?? 0) === 1);
+  const prompt = harness.confirmation?.pending()[0];
+  assert.ok(prompt);
+  assert.equal(harness.confirmation?.approve(prompt.id, prompt.digest, "owner"), true);
+  assert.equal((await promise).ok, true);
+  assert.equal(JSON.stringify(prompt).includes("hunter2"), false);
+  assert.equal(harness.audit.exportJsonl().includes("hunter2"), false);
+});
+
 test("typing into a password field is confirmed with redacted parameters", async () => {
   const harness = createHarness();
   const promise = harness.gate.execute(
@@ -625,4 +639,21 @@ test("invalid confirmation timeouts are rejected by the constructor", () => {
     confirmationTimeoutMs: 0,
   };
   assert.throws(() => new SecurityGate(options), TypeError);
+});
+
+test("a broken cancellation hook cannot turn a denial into a crash", async () => {
+  const fixture = gateWithChannel({
+    request: async () => ({
+      approved: false,
+      reason: "denied",
+      decidedAt: "2026-01-01T00:00:00.000Z",
+    }),
+    cancel: () => {
+      throw new Error("cancel hook is broken");
+    },
+  });
+  const result = await fixture.gate.execute(fixture.request);
+  expectFailure(result, "needs_confirmation");
+  assert.equal(fixture.handlerCalls(), 0);
+  assert.equal(fixture.audit.entries().at(-1)?.confirmation.outcome, "denied");
 });

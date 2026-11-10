@@ -115,7 +115,7 @@ function freezePolicy(
 }
 
 /**
- * Build a validated, immutable-danger policy. This is device-side configuration:
+ * Build a validated danger policy. This is device-side configuration:
  * the model has no tool that can replace or relax it.
  */
 export function createDangerPolicy(options: DangerPolicyOptions = {}): DangerPolicy {
@@ -243,7 +243,8 @@ export function assessDanger(
       ruleId: "default.password-input",
       category: "password",
       message: "向密码框输入需要设备端确认",
-      evidence: node.inputType ?? node.hint ?? node.text,
+      // Never copy user-visible text into evidence: it could contain a typed secret.
+      evidence: node.inputType ?? "password-field",
     });
   }
 

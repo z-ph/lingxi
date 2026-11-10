@@ -80,8 +80,9 @@
 
 - `KillSwitch.engage()`：立即锁定闸门、撤销全部客户端令牌、取消待确认请求、调用 MCP server 的
   `stop()`；返回撤销数、停止结果和警告。幂等。
-- 之后所有调用（含旧令牌）返回 `blocked`；恢复需要重新配对并重启服务。真机上的按钮和前台服务
-  停止由 App 接入点调用 `SecurityGate.engageKillSwitch()`。
+- 之后所有调用（含旧令牌）返回 `blocked`；恢复需要重新配对并重启服务。已经开始的 handler 无法
+  回滚，断开会阻止后续调用和待确认动作。真机上的按钮和前台服务停止由 App 接入点调用
+  `SecurityGate.engageKillSwitch()`。
 
 ### 接入示例
 
