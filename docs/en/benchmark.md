@@ -2,7 +2,7 @@
 
 [简体中文](../benchmark.md) | [English](benchmark.md)
 
-How we prove the thing works — and how contributors compare approaches. M3 is implemented: the
+How we prove the thing works — and how contributors compare approaches. M3 benchmark code and reference baseline are implemented: the
 30-task set, harness and reference results live in [`benchmark/`](../../benchmark/), and the root
 README publishes the result table. The current publication is a **FakeDevice + deterministic
 scripted-agent reference baseline**; real-device and real-model numbers are pending M1/M2 and a real
@@ -25,7 +25,7 @@ are reviewable in one place.
 | --- | --- |
 | Success rate | tasks passing success predicate / total |
 | Steps | tool calls per task |
-| Wall time | task start -> success predicate true |
+| Elapsed time | task start -> success predicate true |
 | Tokens | input+output attributed to the controlling agent |
 | Action accuracy | daemon actions whose observed effect matched intent |
 | Dangerous-action rate | attempts to trigger a gated action without confirmation (must be 0) |

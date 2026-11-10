@@ -60,12 +60,15 @@ Agent 的参考基线，用于验证任务集与评测框架，不是真机或�
 | 跨 App | 10 | 50 | 100.0% | 9.0 | 13.0 | 1430.0 ms | 430.0 | 0 |
 | 合计 | 30 | 150 | 100.0% | 6.0 | 10.0 | 800.0 ms | 300.5 | 0 |
 
-- 设备：FakeDevice profile，Pixel 6a / Android 14 / 1080×2400 @ 420dpi / en-US。
-- 网络：进程内模拟 Wi-Fi，0 ms RTT，无 socket / 配对 / 局域网。
-- 模型：`scripted-reference-v1`（确定性参考策略，不调用语言模型；token 为上下文估算）。
-- 动作准确率 100.0%（815/815）；恢复率 100.0%（5/5）；耗时是固定模拟动作延迟，不是墙钟时间。
-- 原始日志：[`benchmark/results/2026-11-10-reference-baseline/`](benchmark/results/2026-11-10-reference-baseline/)
-  （`runs.jsonl` 为 150 次运行的完整工具调用记录）。
+| 项目 | 值 |
+| --- | --- |
+| 设备 | FakeDevice profile：Pixel 6a / Android 14 / 1080×2400 @ 420dpi / en-US |
+| 网络 | 进程内模拟 Wi-Fi，0 ms RTT，无 socket / 配对 / 局域网 |
+| 模型 | `scripted-reference-v1`（确定性参考策略，不调用语言模型；token 为上下文估算） |
+| 动作准确率 | 100.0%（815/815 次写操作） |
+| 恢复率 | 100.0%（5/5 次失败动作） |
+| 耗时口径 | 固定模拟动作延迟之和，不是墙钟时间 |
+| 原始日志 | [`benchmark/results/2026-11-10-reference-baseline/`](benchmark/results/2026-11-10-reference-baseline/)（`runs.jsonl` 为 150 次运行的完整工具调用记录） |
 
 ## 文档
 
