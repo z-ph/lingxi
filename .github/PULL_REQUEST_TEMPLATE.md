@@ -6,6 +6,9 @@ M0 / M1 / M2 / M3 / M4
 
 ## 如何验证
 
+- [ ] `npm ci && npm run format:check && npm run gate && npm test && npm run build && npm run typecheck` 通过
+- [ ] 如新增包/依赖/跨层调用，已更新 `docs/architecture.md` 的机器契约
+
 ## 不做什么
 
 ## 关联 issue

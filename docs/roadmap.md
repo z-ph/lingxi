@@ -13,11 +13,16 @@
 - [x] AGENTS.md 工作规则
 - [x] 30 秒演示脚本与录制方案（issue #1）
 - [x] 常见问题 FAQ（issue #10）
+- [x] 技术栈、架构规范、monorepo 布局、CI 闸机与定期巡检（issue #18）
 
 ## M1 —— MCP MVP（开发者可用，进行中）
 
 实现形态（已定）：
-- 守护进程用 TypeScript / Node 实现，仓库根目录即包根；`npm ci && npm run build && npm test` 必须通过。
+- 守护进程用 TypeScript / Node 实现；仓库是 npm workspaces monorepo，产品代码进入
+  `packages/contracts`、`packages/device`、`packages/daemon`，根目录只放 workspace/工具链配置。
+  包边界与依赖规则见 [architecture.md](architecture.md)。
+- `npm ci && npm run format:check && npm run gate && npm run build && npm test` 必须通过
+  （另跑 `npm run typecheck`）。
 - 设备能力统一走 `Device` 适配层；M1 交付 `FakeDevice`（内存态、可脚本化），测试不依赖真机。
 - Android 真机通道（Termux / ADB 后端）属于 M2，M1 不做。
 
@@ -28,6 +33,10 @@
 - 动作结果报告"是否生效"；失败显式返回，不静默。
 - 演示录制：笔记本上的 Agent 在手机上完成一个真实任务。（真机录制属于演示项，M1 代码验收以自动化测试为准；
   未接真机时在 PR 正文写明“真机未验证”。）
+
+验收口径：M1 的自动化验收以 Node 参考守护进程 + `FakeDevice` 证明协议与工具语义；手机内宿主和
+真机通道属于 M2。“手机本地运行”是目标交付形态，不以缺少真机阻塞 M1 的代码验收；真实客户端和
+真机限制在 PR 中如实写明。分层与部署边界见 [architecture.md](architecture.md)。
 
 不做：录制回放、白名单界面、多客户端并发公平性。
 
