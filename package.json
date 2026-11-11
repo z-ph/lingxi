@@ -12,8 +12,12 @@
     "packages/*"
   ],
   "scripts": {
+    "build": "npm run build --workspaces --if-present",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "gate": "node packages/architecture-gate/src/cli.mjs",
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
   },
   "devDependencies": {
     "@types/node": "24.19.2",

@@ -1,0 +1,13 @@
+{
+  "name": "@phone-as-tool/daemon",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@phone-as-tool/contracts": "workspace:*",
+    "@phone-as-tool/device": "workspace:*"
+  }
+}
