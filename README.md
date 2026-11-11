@@ -50,9 +50,13 @@ Phone as Tool 在手机这一侧补上这个缺口，而且控制权在你手里
 
 - [愿景](docs/vision.md)（[English](docs/en/vision.md)）
 - [路线图](docs/roadmap.md)（[English](docs/en/roadmap.md)）
+- [架构与技术栈](docs/architecture.md)（[English](docs/en/architecture.md)）
 - [MCP 工具契约](docs/mcp-tools.md)（[English](docs/en/mcp-tools.md)）
 - [安全](docs/security.md)（[English](docs/en/security.md)）
 - [评测](docs/benchmark.md)（[English](docs/en/benchmark.md)）
+- [CI 闸机](docs/ci-gates.md)（[English](docs/en/ci-gates.md)）
+- [架构巡检](docs/architecture-review.md)（[English](docs/en/architecture-review.md)）
+- [30 秒演示](docs/demo.md)（[English](docs/en/demo.md)）
 - [常见问题](docs/faq.md)（[English](docs/en/faq.md)）
 
 ## 参与

@@ -49,16 +49,20 @@ Design principles:
 
 ## Docs
 
-- [Vision](docs/vision.md) — problem, users, wedge, success metrics
-- [Roadmap](docs/roadmap.md) — milestones and acceptance criteria
-- [MCP tool surface](docs/mcp-tools.md) — the contract agents see
-- [Security](docs/security.md) — threat model and safety requirements
-- [Benchmark](docs/benchmark.md) — how we measure success
+- [Vision](docs/en/vision.md) — problem, users, wedge, success metrics
+- [Roadmap](docs/en/roadmap.md) — milestones and acceptance criteria
+- [Architecture and tech stack](docs/en/architecture.md) — layout, layers, single source of truth
+- [MCP tool surface](docs/en/mcp-tools.md) — the contract agents see
+- [Security](docs/en/security.md) — threat model and safety requirements
+- [Benchmark](docs/en/benchmark.md) — how we measure success
+- [CI gates](docs/en/ci-gates.md) — machine checks and usability probes
+- [Architecture review](docs/en/architecture-review.md) — cadence and checklist
+- [30-second demo](docs/en/demo.md) — task, script and recording plan
 - [FAQ](docs/en/faq.md) — root/developer mode, data, Android versions
 
 ## Contributing
 
-See [AGENTS.md](AGENTS.md) for how work is done in this repository (humans and agents alike).
+See [AGENTS.en.md](AGENTS.en.md) for how work is done in this repository (humans and agents alike).
 Early days: please open an issue with the task you want automated.
 
 ## License

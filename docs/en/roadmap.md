@@ -11,12 +11,17 @@ Milestones are sequential. A milestone ships only when its acceptance criteria p
 - [x] AGENTS.md operating rules
 - [x] 30-second demo script defined (issue #1)
 - [x] FAQ (issue #10)
+- [x] Tech stack, architecture norms, monorepo layout, CI gates and periodic review (issue #18)
 
 ## M1 — MCP MVP (usable by a developer, in progress)
 
 Implementation shape (decided):
-- The daemon is TypeScript / Node with the repository root as the package root; `npm ci && npm run
-  build && npm test` must pass.
+- The daemon is TypeScript / Node; this is an npm workspaces monorepo and product code lives in
+  `packages/contracts`, `packages/device` and `packages/daemon`, with the root holding
+  workspace/toolchain config. Package boundaries and dependency rules are in
+  [architecture.md](architecture.md).
+- `npm ci && npm run format:check && npm run gate && npm run build && npm test` must pass (plus
+  `npm run typecheck`).
 - All device access goes through a `Device` adapter; M1 ships `FakeDevice` (in-memory, scriptable),
   so tests never need a real phone.
 - The Android device backend (Termux / ADB) belongs to M2 and is out of scope for M1.
@@ -29,6 +34,12 @@ Acceptance:
 - Demo recording: agent on a laptop completes one real task on the phone. (The recording is a demo
   item; M1 code acceptance is proven by automated tests. Without a device attached, the PR body states
   the "not verified on a real device" limitation.)
+
+Acceptance note: M1's automated acceptance uses the Node reference daemon plus `FakeDevice` to prove
+protocol and tool semantics; the on-phone host and real-device channel belong to M2. "Runs locally on
+the phone" is the target delivery shape and does not block M1 code acceptance when no real device is
+attached; real-client and real-device limitations are recorded honestly in the PR. See
+[architecture.md](architecture.md) for layering and deployment boundaries.
 
 Out of scope: record/replay, allowlist UI, multi-client concurrency fairness.
 
