@@ -1,0 +1,9 @@
+# 中文 Markdown 不强制重排；docs 由 DOC-* 闸机检查
+docs/
+*.md
+node_modules/
+package-lock.json
+dist/
+dist-test/
+coverage/
+artifacts/

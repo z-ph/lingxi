@@ -1,0 +1,23 @@
+{
+  "name": "phone-as-tool",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Phone as Tool: turn an Android phone into a LAN-only MCP device daemon for AI agents.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "prettier": "3.9.10",
+    "typescript": "5.9.3"
+  }
+}
