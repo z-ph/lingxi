@@ -6,6 +6,10 @@ local.properties
 .idea/
 # Node
 node_modules/
+dist/
+dist-test/
+*.tsbuildinfo
+coverage/
 # OS
 .DS_Store
 Thumbs.db
