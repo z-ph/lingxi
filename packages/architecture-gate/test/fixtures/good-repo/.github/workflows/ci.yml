@@ -1,0 +1,17 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run gate
+      - run: npm test
+      - run: npm run build
+      - run: npm run typecheck

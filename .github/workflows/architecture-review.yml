@@ -1,0 +1,54 @@
+name: 架构巡检
+
+on:
+  schedule:
+    - cron: '0 1 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: architecture-review
+  cancel-in-progress: false
+
+jobs:
+  remind:
+    name: 创建月度巡检 issue
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: 检查是否已有未关闭的巡检 issue
+        id: existing
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          count=$(gh issue list --state open --limit 100 --json title \
+            --jq '[.[] | select(.title | startswith("[架构巡检]"))] | length')
+          if [ "$count" -gt 0 ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: 创建巡检 issue
+        if: steps.existing.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          month=$(date -u +%Y-%m)
+          review_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/blob/main/docs/architecture-review.md"
+          gh issue create \
+            --title "[架构巡检] ${month} 规范与架构巡检" \
+            --body "这是由 .github/workflows/architecture-review.yml 自动创建的月度巡检提醒。
+
+          请按 [docs/architecture-review.md](${review_url}) 的清单执行，并把结论、发现和后续 issue 链接记录在本 issue 里。
+
+          - [ ] npm ci && npm run gate && npm test && npm run build && npm run typecheck
+          - [ ] 依赖与包布局无漂移，或已用 PR 更新 docs/architecture.md 的机器契约
+          - [ ] 闸机 probe 全绿；没有用 continue-on-error 绕过
+          - [ ] 发现项都有归属；结论已记录
+
+          关闭条件：清单完成、发现项都有 issue/PR 或明确的不改理由。"

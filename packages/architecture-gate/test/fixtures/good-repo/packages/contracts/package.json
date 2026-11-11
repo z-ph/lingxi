@@ -1,0 +1,9 @@
+{
+  "name": "@phone-as-tool/contracts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  }
+}

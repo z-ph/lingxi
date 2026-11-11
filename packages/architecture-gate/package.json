@@ -1,0 +1,14 @@
+{
+  "name": "@phone-as-tool/architecture-gate",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Zero-dependency machine gate for the repository's architecture and norm contract.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test test/gate.test.mjs test/cli.test.mjs"
+  }
+}

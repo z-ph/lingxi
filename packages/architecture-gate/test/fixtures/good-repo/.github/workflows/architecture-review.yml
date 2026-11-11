@@ -1,0 +1,12 @@
+name: Architecture review
+
+on:
+  schedule:
+    - cron: '0 1 1 * *'
+  workflow_dispatch:
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh issue create --title "Architecture review" --body "See docs/architecture-review.md"
